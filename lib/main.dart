@@ -13,10 +13,6 @@ class MyApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            brightness: Brightness.light,
-            useMaterial3: true,
-            fontFamily: "Poppins"),
         home: LoginScreen(),
       ),
     );
