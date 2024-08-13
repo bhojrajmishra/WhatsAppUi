@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/screens/secondScreen.dart';
+import 'package:flutter_first_ui/components/my_listTile.dart';
+import 'package:flutter_first_ui/screens/second_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,24 +19,24 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "WhatsApp",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
           actions: [
             IconButton(
-              icon: Icon(Icons.search),
+              icon: const Icon(Icons.search),
               onPressed: () {},
               color: Colors.white,
             ),
             IconButton(
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
               onPressed: () {},
               color: Colors.white,
             ),
           ],
-          bottom: TabBar(
+          bottom: const TabBar(
             tabs: [
               Tab(text: "Chats"),
               Tab(text: "Status"),
@@ -55,41 +56,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Secondscreen()),
+                      MaterialPageRoute(
+                          builder: (context) => Secondscreen(
+                                title: chats[index],
+                              )),
                     );
                     print("Chat ${chats[index]}");
                   },
-                  leading: CircleAvatar(),
+                  leading: const CircleAvatar(),
                   title: Text(chats[index],
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text("This is a message"),
-                  trailing: Text("10:00 PM"),
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: const Text("This is a message"),
+                  trailing: const Text("10:00 PM"),
                 );
               },
             ),
             ListView.builder(
               itemCount: status.length,
               itemBuilder: (BuildContext context, index) {
-                return ListTile(
-                  leading: Icon(Icons.account_circle),
-                  title: Text(status[index]),
-                );
+                return MyListtile(
+                    text: status[index], icon: Icons.account_circle);
               },
             ),
             ListView.builder(
               itemCount: calls.length,
               itemBuilder: (BuildContext context, index) {
-                return ListTile(
-                  leading: Icon(Icons.call),
-                  title: Text(calls[index]),
-                );
+                return MyListtile(text: calls[index], icon: Icons.call);
               },
             ),
           ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: Icon(Icons.message, color: Colors.white),
+          child: const Icon(Icons.message, color: Colors.white),
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
         ),
       ),

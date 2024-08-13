@@ -9,8 +9,6 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-int count = 0;
-
 class _LoginScreenState extends State<LoginScreen> {
   var userForm = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
@@ -56,10 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 23),
               ElevatedButton(
                 onPressed: () {
-                  if (userForm.currentState!.validate()) {
-                    print("Email: ${email.text}");
-                    print("Password: ${password.text}");
-                  }
+                  debugPrint("Email: ${email.text}");
+                  debugPrint("Password: ${password.text}");
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
                     return HomeScreen();
