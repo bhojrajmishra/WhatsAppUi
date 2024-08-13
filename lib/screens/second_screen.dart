@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/components/message_bubble.dart';
+import 'package:flutter_first_ui/components/message_input_row.dart';
 
 class Secondscreen extends StatefulWidget {
   final String title;
@@ -54,66 +56,14 @@ class _SecondscreenState extends State<Secondscreen> {
               itemBuilder: (context, index) {
                 final message = _messages[index];
                 final isUserMessage = index % 2 == 0;
-                return Align(
-                  alignment: isUserMessage
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 8.0),
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: isUserMessage ? Colors.green : Colors.grey[300],
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
-                        bottomLeft:
-                            isUserMessage ? Radius.circular(12) : Radius.zero,
-                        bottomRight:
-                            isUserMessage ? Radius.zero : Radius.circular(12),
-                      ),
-                    ),
-                    child: Text(
-                      message,
-                      style: TextStyle(
-                          color: isUserMessage ? Colors.white : Colors.black87),
-                    ),
-                  ),
+                return MessageBubble(
+                  message: message,
+                  isUserMessage: isUserMessage,
                 );
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      hintText: "Message",
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.send),
-                        onPressed: _sendMessage,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FloatingActionButton(
-                    backgroundColor: const Color.fromARGB(255, 16, 83, 18),
-                    onPressed: () {},
-                    child: Icon(Icons.mic_rounded, color: Colors.white),
-                    shape: CircleBorder(),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          MessageInputRow(controller: _controller, onSendMessage: _sendMessage)
         ],
       ),
     );
