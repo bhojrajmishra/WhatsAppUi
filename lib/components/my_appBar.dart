@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MyAppbar extends StatelessWidget {
+class MyAppBar extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Icon icon2;
-  MyAppbar(
-      {super.key,
-      required this.title,
-      required this.icon,
-      required this.icon2});
+  final IconData icon2;
+
+  MyAppBar({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.icon2,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class MyAppbar extends StatelessWidget {
         title,
         style: TextStyle(color: Colors.white),
       ),
-      backgroundColor: const Color.fromARGB(255, 16, 83, 18),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       actions: [
         IconButton(
           icon: Icon(icon),
@@ -25,7 +27,7 @@ class MyAppbar extends StatelessWidget {
           color: Colors.white,
         ),
         IconButton(
-          icon: Icon(icon2.icon),
+          icon: Icon(icon2),
           onPressed: () {},
           color: Colors.white,
         ),

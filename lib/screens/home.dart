@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/my_listTile.dart';
+
 import 'package:flutter_first_ui/screens/second_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,28 +24,28 @@ class _HomeScreenState extends State<HomeScreen> {
             "WhatsApp",
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: const Color.fromARGB(255, 16, 83, 18),
+          backgroundColor: Theme.of(context).colorScheme.primary,
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {},
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
             IconButton(
               icon: const Icon(Icons.more_vert),
               onPressed: () {},
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.inversePrimary,
             ),
           ],
-          bottom: const TabBar(
-            tabs: [
+          bottom: TabBar(
+            tabs: const [
               Tab(text: "Chats"),
               Tab(text: "Status"),
               Tab(text: "Calls"),
             ],
-            labelColor: Colors.white,
+            labelColor: Theme.of(context).colorScheme.inversePrimary,
             unselectedLabelColor: Colors.grey,
-            indicatorColor: Colors.white,
+            indicatorColor: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
         body: TabBarView(
@@ -61,9 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: chats[index],
                               )),
                     );
-                    print("Chat ${chats[index]}");
+                    debugPrint("Chat ${chats[index]}");
                   },
-                  leading: const CircleAvatar(),
+                  leading: CircleAvatar(
+                    backgroundImage:
+                        NetworkImage('https://via.placeholder.com/150'),
+                  ),
                   title: Text(chats[index],
                       style: const TextStyle(fontWeight: FontWeight.bold)),
                   subtitle: const Text("This is a message"),
@@ -88,8 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
-          child: const Icon(Icons.message, color: Colors.white),
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
+          child: Icon(Icons.message,
+              color: Theme.of(context).colorScheme.inversePrimary),
         ),
       ),
     );

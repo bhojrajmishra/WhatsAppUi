@@ -30,9 +30,9 @@ class _SecondscreenState extends State<Secondscreen> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: TextStyle(color: Theme.of(context).colorScheme.surface),
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         ),
-        backgroundColor: const Color.fromARGB(255, 16, 83, 18),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           IconButton(
             icon: Icon(Icons.attach_file_outlined),
@@ -45,13 +45,6 @@ class _SecondscreenState extends State<Secondscreen> {
             color: Colors.white,
           ),
         ],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Colors.white,
-        ),
       ),
       body: Column(
         children: [

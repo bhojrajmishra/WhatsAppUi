@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/login.dart';
+// Import the custom widget
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -13,6 +15,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController name = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,48 +45,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         height: 100,
                         width: 100,
                       ),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: name,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Full Name is Required";
-                          }
-                        },
-                        decoration: InputDecoration(labelText: "Full Name"),
-                      ),
+                      CustomTextFormField(
+                          controller: name, labelText: "Full Name"),
                       SizedBox(height: 23),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: email,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Email is Required";
-                          }
-                        },
-                        decoration: InputDecoration(labelText: "Email"),
-                      ),
+                      CustomTextFormField(
+                          controller: email, labelText: "Email"),
                       SizedBox(height: 23),
-                      TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        controller: password,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Password is Required";
-                          }
-                        },
-                        decoration: InputDecoration(labelText: "Password"),
-                      ),
+                      CustomTextFormField(
+                          controller: password, labelText: "password"),
                       SizedBox(height: 23),
                       ElevatedButton(
                         onPressed: () {
-                          print("Email: ${email.text}");
-                          print("Password: ${password.text}");
-                          print("Name: ${name.text}");
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return LoginScreen();
-                          }));
+                          if (userForm.currentState?.validate() ?? false) {
+                            print("Email: ${email.text}");
+                            print("Password: ${password.text}");
+                            print("Name: ${name.text}");
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) {
+                              return LoginScreen();
+                            }));
+                          }
                         },
                         child: Text("Register"),
                       ),

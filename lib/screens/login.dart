@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/home.dart';
 import 'package:flutter_first_ui/screens/registration.dart';
 
@@ -27,30 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 100,
                 width: 100,
               ),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: email,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Email is Required";
-                  }
-                },
-                decoration: InputDecoration(labelText: "Email"),
-              ),
+              CustomTextFormField(controller: email, labelText: "Email"),
               SizedBox(height: 23),
-              TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: password,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "password is Required";
-                  }
-                },
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(labelText: "password"),
-              ),
+              CustomTextFormField(controller: password, labelText: "Password"),
               SizedBox(height: 23),
               ElevatedButton(
                 onPressed: () {
