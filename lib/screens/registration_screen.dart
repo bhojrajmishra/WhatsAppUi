@@ -4,14 +4,14 @@ import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/login_screen.dart';
 import 'package:flutter_first_ui/utils/constraints.dart';
 
-class registration_screen extends StatefulWidget {
-  const registration_screen({super.key});
+class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({super.key});
 
   @override
-  State<registration_screen> createState() => _RegistrationScreenState();
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
 }
 
-class _RegistrationScreenState extends State<registration_screen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final userForm = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -42,7 +42,7 @@ class _RegistrationScreenState extends State<registration_screen> {
         );
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const login_screen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -68,7 +68,7 @@ class _RegistrationScreenState extends State<registration_screen> {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const login_screen()),
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
             );
           },
         ),

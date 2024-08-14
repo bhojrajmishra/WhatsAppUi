@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget {
+class UserAppBar extends StatelessWidget {
   final String title;
   final IconData icon;
   final IconData icon2;
 
-  MyAppBar({
+  UserAppBar({
     super.key,
     required this.title,
     required this.icon,

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: login_screen(),
+        home: LoginScreen(),
         theme: CustomTheme.lightTheme(),
       ),
     );

@@ -5,14 +5,14 @@ import 'package:flutter_first_ui/screens/home_screen.dart';
 import 'package:flutter_first_ui/screens/registration_screen.dart';
 import 'package:flutter_first_ui/utils/constraints.dart';
 
-class login_screen extends StatefulWidget {
-  const login_screen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<login_screen> createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<login_screen> {
+class _LoginScreenState extends State<LoginScreen> {
   final userForm = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<login_screen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const home_screen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       } else {
@@ -101,7 +101,7 @@ class _LoginScreenState extends State<login_screen> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const registration_screen();
+                        return const RegistrationScreen();
                       }));
                     },
                     child: const Text(

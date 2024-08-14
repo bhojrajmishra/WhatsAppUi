@@ -4,14 +4,14 @@ import 'package:flutter_first_ui/screens/chat_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/utils/constraints.dart';
 
-class home_screen extends StatefulWidget {
-  const home_screen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<home_screen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<home_screen> {
+class _HomeScreenState extends State<HomeScreen> {
   List<dynamic> chats = [];
   List<String> status = ["Status 1", "Status 2", "Status 3"];
   List<String> calls = ["Call 1", "Call 2", "Call 3"];
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<home_screen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => chat_screen(
+                                  builder: (context) => ChatScreen(
                                         title:
                                             chats[index]['email'] ?? "No email",
                                       )),
@@ -123,14 +123,14 @@ class _HomeScreenState extends State<home_screen> {
             ListView.builder(
               itemCount: status.length,
               itemBuilder: (BuildContext context, index) {
-                return MyListtile(
+                return UserListTile(
                     text: status[index], icon: Icons.account_circle);
               },
             ),
             ListView.builder(
               itemCount: calls.length,
               itemBuilder: (BuildContext context, index) {
-                return MyListtile(text: calls[index], icon: Icons.call);
+                return UserListTile(text: calls[index], icon: Icons.call);
               },
             ),
           ],
