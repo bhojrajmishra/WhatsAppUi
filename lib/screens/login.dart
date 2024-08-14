@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/home.dart';
 import 'package:flutter_first_ui/screens/registration.dart';
+import 'package:dio/dio.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,6 +16,28 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   @override
+  Future<void> putData() async {
+    //get data from api
+
+    setState(() {
+      // isloading = true;
+    });
+    try {
+      Response response =
+          await Dio().put("https://tbe.thuprai.com/v1/api/login/");
+      debugPrint(response.data.toString());
+
+      setState(() {
+        // chats = response.data['data'];
+        // isloading = false;
+      });
+    } catch (e) {
+      // isloading = false;
+      setState(() {});
+      debugPrint(e.toString());
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(

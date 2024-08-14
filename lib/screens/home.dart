@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/my_listTile.dart';
 
 import 'package:flutter_first_ui/screens/second_screen.dart';
+import 'package:dio/dio.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,9 +12,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> chats = ["Chat 1", "Chat 2", "Chat 3"];
+  List<dynamic> chats = [];
   List<String> status = ["Status 1", "Status 2", "Status 3"];
   List<String> calls = ["Call 1", "Call 2", "Call 3"];
+  bool isloading = false;
+
+  Future<void> getData() async {
+    //get data from api
+
+    setState(() {
+      isloading = true;
+    });
+    try {
+      Response response = await Dio().get("https://reqres.in/api/users?page=2");
+      debugPrint(response.data.toString());
+
+      setState(() {
+        chats = response.data['data'];
+        isloading = false;
+      });
+    } catch (e) {
+      isloading = false;
+      setState(() {});
+      debugPrint(e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -50,30 +80,44 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: TabBarView(
           children: [
-            ListView.builder(
-              itemCount: chats.length,
-              itemBuilder: (BuildContext context, index) {
-                return ListTile(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Secondscreen(
-                                title: chats[index],
-                              )),
-                    );
-                    debugPrint("Chat ${chats[index]}");
-                  },
-                  leading: CircleAvatar(
-                    backgroundImage:
-                        NetworkImage('https://via.placeholder.com/150'),
-                  ),
-                  title: Text(chats[index],
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: const Text("This is a message"),
-                  trailing: const Text("10:00 PM"),
-                );
+            RefreshIndicator(
+              onRefresh: () async {
+                getData();
               },
+              child: isloading
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: chats.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return ListTile(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Secondscreen(
+                                        title: chats[index],
+                                      )),
+                            );
+                            debugPrint("Chat ${chats[index]}");
+                          },
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                chats[index]['avatar'] ?? "No image"),
+                          ),
+                          title: Text(
+                              chats[index]['email'] ??
+                                  "No email", //fall back vale if email is null
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          subtitle: Text(
+                              chats[index]['first_name'] ??
+                                  "No first name", //fall back vale if email is null
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          trailing: Text(chats[index]['id'].toString()),
+                        );
+                      },
+                    ),
             ),
             ListView.builder(
               itemCount: status.length,
@@ -91,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: getData,
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
           child: Icon(Icons.message,
               color: Theme.of(context).colorScheme.inversePrimary),
