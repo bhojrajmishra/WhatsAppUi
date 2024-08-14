@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/home.dart';
 import 'package:flutter_first_ui/screens/registration.dart';
-import 'package:dio/dio.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,32 +12,51 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var userForm = GlobalKey<FormState>();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  @override
-  Future<void> putData() async {
-    //get data from api
+  final userForm = GlobalKey<FormState>();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
-    setState(() {
-      // isloading = true;
-    });
+  Future<void> loginUser() async {
+    final payload = {
+      'username': email.text,
+      'password': password.text,
+    };
+    debugPrint("Payload: $payload");
+
     try {
-      Response response =
-          await Dio().put("https://tbe.thuprai.com/v1/api/login/");
-      debugPrint(response.data.toString());
+      // Make the POST request
+      Response response = await Dio().post(
+        "https://tbe.thuprai.com/v1/api/login/",
+        data: payload,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
 
-      setState(() {
-        // chats = response.data['data'];
-        // isloading = false;
-      });
+      if (response.statusCode == 200) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      } else {
+        // Show error if login failed
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login failed: ${response.statusCode}')),
+        );
+      }
     } catch (e) {
-      // isloading = false;
-      setState(() {});
-      debugPrint(e.toString());
+      debugPrint('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('An error occurred: $e')),
+      );
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
@@ -47,40 +66,44 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
                 width: 100,
               ),
-              CustomTextFormField(controller: email, labelText: "Email"),
-              SizedBox(height: 23),
-              CustomTextFormField(controller: password, labelText: "Password"),
-              SizedBox(height: 23),
+              CustomTextFormField(
+                controller: email,
+                labelText: "Email",
+                obscureText: false,
+              ),
+              const SizedBox(height: 23),
+              CustomTextFormField(
+                controller: password,
+                labelText: "Password",
+                obscureText: true,
+              ),
+              const SizedBox(height: 23),
               ElevatedButton(
                 onPressed: () {
-                  debugPrint("Email: ${email.text}");
-                  debugPrint("Password: ${password.text}");
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) {
-                    return HomeScreen();
-                  }));
+                  if (userForm.currentState?.validate() ?? false) {
+                    loginUser();
+                  }
                 },
-                child: Text("Login"),
+                child: const Text("Login"),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
-                  SizedBox(width: 5),
+                  const Text("Don't have an account?"),
+                  const SizedBox(width: 5),
                   InkWell(
                     onTap: () {
-                      Navigator.pushReplacement(context,
+                      Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return RegistrationScreen();
+                        return const RegistrationScreen();
                       }));
                     },
-                    child: Text(
+                    child: const Text(
                       "Register here!",
                       style: TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.bold),

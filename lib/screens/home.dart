@@ -18,8 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isloading = false;
 
   Future<void> getData() async {
-    //get data from api
-
     setState(() {
       isloading = true;
     });
@@ -85,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 getData();
               },
               child: isloading
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: chats.length,
                       itemBuilder: (BuildContext context, index) {
@@ -95,7 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Secondscreen(
-                                        title: chats[index],
+                                        title:
+                                            chats[index]['email'] ?? "No email",
                                       )),
                             );
                             debugPrint("Chat ${chats[index]}");

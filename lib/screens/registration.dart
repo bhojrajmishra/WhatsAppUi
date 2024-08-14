@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/login.dart';
-// Import the custom widget
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -11,10 +11,51 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  var userForm = GlobalKey<FormState>();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController name = TextEditingController();
+  final userForm = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+
+  Future<void> registerUser() async {
+    final payload = {
+      'email': emailController.text,
+      'full_name': nameController.text,
+      'password': passwordController.text,
+    };
+    print("Payload: $payload");
+
+    try {
+      final response = await Dio().post(
+        'https://tbe.thuprai.com/v1/api/signup/',
+        data: payload,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Registration successful')),
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Registration failed: ${response.statusCode}')),
+        );
+      }
+    } catch (e) {
+      // Handle exceptions
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('An error occurred: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,56 +63,58 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         title: const Text("Registration Page"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) {
-              return LoginScreen();
-            })); // Navigate back to previous screen
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
           },
         ),
       ),
       body: Column(
         children: [
           Expanded(
-              child: SingleChildScrollView(
-            child: Form(
+            child: SingleChildScrollView(
+              child: Form(
                 key: userForm,
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 100,
                         width: 100,
                       ),
                       CustomTextFormField(
-                          controller: name, labelText: "Full Name"),
-                      SizedBox(height: 23),
+                          controller: nameController,
+                          labelText: "full_name",
+                          obscureText: false),
+                      const SizedBox(height: 23),
                       CustomTextFormField(
-                          controller: email, labelText: "Email"),
-                      SizedBox(height: 23),
+                          controller: emailController,
+                          labelText: "email",
+                          obscureText: false),
+                      const SizedBox(height: 23),
                       CustomTextFormField(
-                          controller: password, labelText: "password"),
-                      SizedBox(height: 23),
+                          controller: passwordController,
+                          labelText: "password",
+                          obscureText: true),
+                      const SizedBox(height: 23),
                       ElevatedButton(
                         onPressed: () {
                           if (userForm.currentState?.validate() ?? false) {
-                            print("Email: ${email.text}");
-                            print("Password: ${password.text}");
-                            print("Name: ${name.text}");
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) {
-                              return LoginScreen();
-                            }));
+                            registerUser();
                           }
                         },
-                        child: Text("Register"),
+                        child: const Text("Register"),
                       ),
                     ],
                   ),
-                )),
-          ))
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -5,7 +5,7 @@ import 'package:flutter_first_ui/components/message_input_row.dart';
 class Secondscreen extends StatefulWidget {
   final String title;
 
-  Secondscreen({super.key, required this.title});
+  const Secondscreen({super.key, required this.title});
 
   @override
   State<Secondscreen> createState() => _SecondscreenState();
@@ -31,18 +31,18 @@ class _SecondscreenState extends State<Secondscreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.title,
+          "${widget.title}",
           style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           IconButton(
-            icon: Icon(Icons.attach_file_outlined),
+            icon: const Icon(Icons.attach_file_outlined),
             onPressed: () {},
             color: Colors.white,
           ),
           IconButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             onPressed: () {},
             color: Colors.white,
           ),
