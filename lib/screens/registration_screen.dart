@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
-import 'package:flutter_first_ui/screens/login.dart';
+import 'package:flutter_first_ui/screens/login_screen.dart';
+import 'package:flutter_first_ui/utils/constraints.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class registration_screen extends StatefulWidget {
+  const registration_screen({super.key});
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<registration_screen> createState() => _RegistrationScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _RegistrationScreenState extends State<registration_screen> {
   final userForm = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
-  Future<void> registerUser() async {
+  Future<void> RequestRegistrationApi() async {
     final payload = {
       'email': emailController.text,
       'full_name': nameController.text,
@@ -26,7 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     try {
       final response = await Dio().post(
-        'https://tbe.thuprai.com/v1/api/signup/',
+        ApiPath.register,
         data: payload,
         options: Options(
           headers: {
@@ -41,7 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         );
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          MaterialPageRoute(builder: (context) => const login_screen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -67,7 +68,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
+              MaterialPageRoute(builder: (context) => const login_screen()),
             );
           },
         ),
@@ -104,7 +105,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ElevatedButton(
                         onPressed: () {
                           if (userForm.currentState?.validate() ?? false) {
-                            registerUser();
+                            RequestRegistrationApi();
                           }
                         },
                         child: const Text("Register"),

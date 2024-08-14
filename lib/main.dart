@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/screens/login.dart';
+import 'package:flutter_first_ui/screens/login_screen.dart';
 import 'package:flutter_first_ui/themes/light_mode.dart';
 
 void main() {
@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
-        theme: lightMode,
+        home: login_screen(),
+        theme: CustomTheme.lightTheme(),
       ),
     );
   }

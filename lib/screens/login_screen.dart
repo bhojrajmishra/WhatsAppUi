@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
-import 'package:flutter_first_ui/screens/home.dart';
-import 'package:flutter_first_ui/screens/registration.dart';
+import 'package:flutter_first_ui/screens/home_screen.dart';
+import 'package:flutter_first_ui/screens/registration_screen.dart';
+import 'package:flutter_first_ui/utils/constraints.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class login_screen extends StatefulWidget {
+  const login_screen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<login_screen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<login_screen> {
   final userForm = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
-  Future<void> loginUser() async {
+  Future<void> RequestLoginApi() async {
     final payload = {
       'username': email.text,
       'password': password.text,
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       // Make the POST request
       Response response = await Dio().post(
-        "https://tbe.thuprai.com/v1/api/login/",
+        ApiPath.login,
         data: payload,
         options: Options(
           headers: {
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const home_screen(),
           ),
         );
       } else {
@@ -85,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (userForm.currentState?.validate() ?? false) {
-                    loginUser();
+                    RequestLoginApi();
                   }
                 },
                 child: const Text("Login"),
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const RegistrationScreen();
+                        return const registration_screen();
                       }));
                     },
                     child: const Text(

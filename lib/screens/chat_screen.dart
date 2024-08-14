@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/message_bubble.dart';
 import 'package:flutter_first_ui/components/message_input_row.dart';
 
-class Secondscreen extends StatefulWidget {
+class chat_screen extends StatefulWidget {
   final String title;
 
-  const Secondscreen({super.key, required this.title});
+  const chat_screen({super.key, required this.title});
 
   @override
-  State<Secondscreen> createState() => _SecondscreenState();
+  State<chat_screen> createState() => _SecondscreenState();
 }
 
-class _SecondscreenState extends State<Secondscreen> {
+class _SecondscreenState extends State<chat_screen> {
   final TextEditingController _controller = TextEditingController();
   final List<String> _messages = [];
   bool _isUserMessage = true;

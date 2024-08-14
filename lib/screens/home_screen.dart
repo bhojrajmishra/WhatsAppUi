@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/components/my_listTile.dart';
-
-import 'package:flutter_first_ui/screens/second_screen.dart';
+import 'package:flutter_first_ui/components/user_list_tile.dart';
+import 'package:flutter_first_ui/screens/chat_screen.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_first_ui/utils/constraints.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class home_screen extends StatefulWidget {
+  const home_screen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<home_screen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<home_screen> {
   List<dynamic> chats = [];
   List<String> status = ["Status 1", "Status 2", "Status 3"];
   List<String> calls = ["Call 1", "Call 2", "Call 3"];
@@ -22,13 +22,15 @@ class _HomeScreenState extends State<HomeScreen> {
       isloading = true;
     });
     try {
-      Response response = await Dio().get("https://reqres.in/api/users?page=2");
+      Response response = await Dio().get(ApiPath.getData);
       debugPrint(response.data.toString());
 
-      setState(() {
-        chats = response.data['data'];
-        isloading = false;
-      });
+      setState(
+        () {
+          chats = response.data['data'];
+          isloading = false;
+        },
+      );
     } catch (e) {
       isloading = false;
       setState(() {});
@@ -92,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Secondscreen(
+                                  builder: (context) => chat_screen(
                                         title:
                                             chats[index]['email'] ?? "No email",
                                       )),
