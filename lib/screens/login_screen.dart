@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/home_screen.dart';
 import 'package:flutter_first_ui/screens/registration_screen.dart';
-import 'package:flutter_first_ui/utils/constraints.dart';
+import 'package:flutter_first_ui/utils/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       // Make the POST request
       Response response = await Dio().post(
-        ApiPath.login,
+        ApiPath.loginUrl,
         data: payload,
         options: Options(
           headers: {

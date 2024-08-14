@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/screens/login_screen.dart';
-import 'package:flutter_first_ui/utils/constraints.dart';
+import 'package:flutter_first_ui/utils/constants.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -27,7 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     try {
       final response = await Dio().post(
-        ApiPath.register,
+        ApiPath.registerUrl,
         data: payload,
         options: Options(
           headers: {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTheme {
+class LightMode {
   static ThemeData lightTheme() {
     return ThemeData(
       colorScheme: ColorScheme.light(

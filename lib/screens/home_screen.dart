@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/user_list_tile.dart';
 import 'package:flutter_first_ui/screens/chat_screen.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_first_ui/utils/constraints.dart';
+import 'package:flutter_first_ui/utils/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       isloading = true;
     });
     try {
-      Response response = await Dio().get(ApiPath.getData);
+      Response response = await Dio().get(ApiPath.userListUrl);
       debugPrint(response.data.toString());
 
       setState(
