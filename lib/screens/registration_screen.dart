@@ -17,7 +17,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
-  Future<void> registrationUrl() async {
+  Future<void> requestRegistrationUrl() async {
     final payload = {
       'email': emailController.text,
       'full_name': nameController.text,
@@ -105,7 +105,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ElevatedButton(
                         onPressed: () {
                           if (userForm.currentState?.validate() ?? false) {
-                            registrationUrl();
+                            requestRegistrationUrl();
                           }
                         },
                         child: const Text("Register"),

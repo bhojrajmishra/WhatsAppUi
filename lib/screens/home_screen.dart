@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/user_list_tile.dart';
 import 'package:flutter_first_ui/screens/chat_screen.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_first_ui/screens/setting_screen.dart';
 import 'package:flutter_first_ui/utils/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -136,9 +137,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SettingScreen()),
+            );
+          },
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
-          child: Icon(Icons.message,
+          child: Icon(Icons.settings,
               color: Theme.of(context).colorScheme.inversePrimary),
         ),
       ),

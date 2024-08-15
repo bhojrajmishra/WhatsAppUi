@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
-  Future<void> loginUrl() async {
+  Future<void> requestLoginUrl() async {
     final payload = {
       'username': email.text,
       'password': password.text,
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (userForm.currentState?.validate() ?? false) {
-                    loginUrl();
+                    requestLoginUrl();
                   }
                 },
                 child: const Text("Login"),
