@@ -1,37 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/message_bubble.dart';
 import 'package:flutter_first_ui/components/message_input_row.dart';
+import 'package:flutter_first_ui/providers/send_message_model.dart';
+import 'package:provider/provider.dart'; // Assuming you have this widget
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   final String title;
 
   const ChatScreen({super.key, required this.title});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
-  final TextEditingController _controller = TextEditingController();
-  final List<String> _messages = [];
-  bool _isUserMessage = true;
-
-  void _sendMessage() {
-    if (_controller.text.isNotEmpty) {
-      setState(() {
-        _messages.add(_controller.text);
-        _controller.clear();
-        _isUserMessage = !_isUserMessage;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final sendMessageModel = Provider.of<SendMessageModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${widget.title}",
+          title,
           style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -52,9 +36,9 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: _messages.length,
+              itemCount: sendMessageModel.messages.length,
               itemBuilder: (context, index) {
-                final message = _messages[index];
+                final message = sendMessageModel.messages[index];
                 final isUserMessage = index % 2 == 0;
                 return MessageBubble(
                   message: message,
@@ -63,7 +47,10 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ),
-          MessageInputRow(controller: _controller, onSendMessage: _sendMessage)
+          MessageInputRow(
+            controller: sendMessageModel.controller,
+            onSendMessage: sendMessageModel.sendMessage,
+          ),
         ],
       ),
     );

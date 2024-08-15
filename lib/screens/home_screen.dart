@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> calls = ["Call 1", "Call 2", "Call 3"];
   bool isloading = false;
 
-  Future<void> getData() async {
+  Future<void> userListUrl() async {
     setState(() {
       isloading = true;
     });
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    getData();
+    userListUrl();
     super.initState();
   }
 
@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             RefreshIndicator(
               onRefresh: () async {
-                getData();
+                userListUrl();
               },
               child: isloading
                   ? const Center(child: CircularProgressIndicator())
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: getData,
+          onPressed: () {},
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
           child: Icon(Icons.message,
               color: Theme.of(context).colorScheme.inversePrimary),
