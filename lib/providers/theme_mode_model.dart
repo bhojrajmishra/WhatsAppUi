@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/themes/custom_theme.dart';
 
 class ThemeModeModel with ChangeNotifier {
   bool isDarkMode = false;
@@ -8,4 +7,6 @@ class ThemeModeModel with ChangeNotifier {
     isDarkMode = darkMode;
     notifyListeners();
   }
+
+  void toggleTheme() {}
 }

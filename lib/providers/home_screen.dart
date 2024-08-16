@@ -9,7 +9,6 @@ class HomeScreenModel extends ChangeNotifier {
   Future<void> fetchUserList() async {
     isLoading = true;
     notifyListeners();
-
     try {
       Response response = await Dio().get(ApiPath.userListUrl);
       chats = response.data['data'];

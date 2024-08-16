@@ -4,7 +4,6 @@ class UserListTile extends StatelessWidget {
   final String text;
   final IconData icon;
   UserListTile({super.key, required this.text, required this.icon});
-
   @override
   Widget build(BuildContext context) {
     return ListTile(

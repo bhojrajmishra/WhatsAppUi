@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/components/user_list_tile.dart';
-import 'package:flutter_first_ui/screens/chat_screen.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_first_ui/components/user_list_tile.dart';
+import 'package:flutter_first_ui/models/user_list.dart';
+import 'package:flutter_first_ui/screens/chat_screen.dart';
 import 'package:flutter_first_ui/screens/setting_screen.dart';
 import 'package:flutter_first_ui/utils/constants.dart';
 
@@ -13,36 +14,39 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<dynamic> chats = [];
+  List<UserList> chats = [];
   List<String> status = ["Status 1", "Status 2", "Status 3"];
   List<String> calls = ["Call 1", "Call 2", "Call 3"];
-  bool isloading = false;
+  bool isLoading = false;
 
-  Future<void> userListUrl() async {
+  Future<void> fetchUserList() async {
     setState(() {
-      isloading = true;
+      isLoading = true;
     });
     try {
       Response response = await Dio().get(ApiPath.userListUrl);
-      debugPrint(response.data.toString());
-
-      setState(
-        () {
-          chats = response.data['data'];
-          isloading = false;
-        },
-      );
+      debugPrint('Response data: ${response.data}');
+      final data = response.data['data'] as List<dynamic>;
+      final parsed = data
+          .map<UserList>(
+              (json) => UserList.fromJson(json as Map<String, dynamic>))
+          .toList();
+      setState(() {
+        chats = parsed;
+        isLoading = false;
+      });
     } catch (e) {
-      isloading = false;
-      setState(() {});
-      debugPrint(e.toString());
+      debugPrint('Error: $e');
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
   @override
   void initState() {
-    userListUrl();
     super.initState();
+    fetchUserList();
   }
 
   @override
@@ -83,9 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             RefreshIndicator(
               onRefresh: () async {
-                userListUrl();
+                fetchUserList();
               },
-              child: isloading
+              child: isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: chats.length,
@@ -96,27 +100,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ChatScreen(
-                                        title:
-                                            chats[index]['email'] ?? "No email",
+                                        title: chats[index].email ?? "No email",
                                       )),
                             );
                             debugPrint("Chat ${chats[index]}");
                           },
                           leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                chats[index]['avatar'] ?? "No image"),
+                            backgroundImage:
+                                NetworkImage(chats[index].avatar ?? "No image"),
                           ),
-                          title: Text(
-                              chats[index]['email'] ??
-                                  "No email", //fall back vale if email is null
+                          title: Text(chats[index].email ?? "No email",
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           subtitle: Text(
-                              chats[index]['first_name'] ??
-                                  "No first name", //fall back vale if email is null
+                              chats[index].firstName ?? "No first name",
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
-                          trailing: Text(chats[index]['id'].toString()),
+                          trailing: Text(chats[index].id.toString()),
                         );
                       },
                     ),

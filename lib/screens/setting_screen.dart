@@ -12,7 +12,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<ThemeModeModel>(context);
+    var themeProvider = context.watch<ThemeModeModel>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
@@ -26,7 +26,7 @@ class _SettingScreenState extends State<SettingScreen> {
             Row(
               children: [
                 Switch(
-                    value: themeProvider.isDarkMode,
+                    value: context.watch<ThemeModeModel>().isDarkMode,
                     onChanged: (value) {
                       themeProvider.updateMode(darkMode: value);
                     }),
