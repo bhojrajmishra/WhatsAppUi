@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_first_ui/components/user_list_tile.dart';
-import 'package:flutter_first_ui/models/user_list.dart';
-import 'package:flutter_first_ui/screens/chat_screen.dart';
-import 'package:flutter_first_ui/screens/setting_screen.dart';
-import 'package:flutter_first_ui/utils/constants.dart';
+import 'package:flutter_first_ui/model/user_list.dart';
+import 'package:flutter_first_ui/view/components/user_listviewbuilder.dart';
+import 'package:flutter_first_ui/view/screens/chat_screen.dart';
+import 'package:flutter_first_ui/view/screens/setting_screen.dart';
+import 'package:flutter_first_ui/utils/api_path.dart';
+import 'package:flutter_first_ui/viewmodel/providers/loading_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   List<UserList> chats = [];
-  List<String> status = ["Status 1", "Status 2", "Status 3"];
-  List<String> calls = ["Call 1", "Call 2", "Call 3"];
-  bool isLoading = false;
-
   Future<void> fetchUserList() async {
-    setState(() {
-      isLoading = true;
-    });
+    final loadingScreen = context.read<LoadingScreen>();
+    loadingScreen.updateLoading(loading: true);
     try {
       Response response = await Dio().get(ApiPath.userListUrl);
       debugPrint('Response data: ${response.data}');
@@ -30,16 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
       final parsed = data
           .map<UserList>(
               (json) => UserList.fromJson(json as Map<String, dynamic>))
-          .toList();
+          .toList(); //converts each JSON object into a UserList instance
       setState(() {
         chats = parsed;
-        isLoading = false;
+        loadingScreen.updateLoading(loading: false);
       });
     } catch (e) {
       debugPrint('Error: $e');
-      setState(() {
-        isLoading = false;
-      });
     }
   }
 
@@ -51,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loadingScreen = context.watch<LoadingScreen>();
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -89,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onRefresh: () async {
                 fetchUserList();
               },
-              child: isLoading
+              child: loadingScreen.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: chats.length,
@@ -100,20 +94,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ChatScreen(
-                                        title: chats[index].email ?? "No email",
+                                        title: chats[index].email,
                                       )),
                             );
                             debugPrint("Chat ${chats[index]}");
                           },
                           leading: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(chats[index].avatar ?? "No image"),
+                            backgroundImage: NetworkImage(chats[index].avatar),
                           ),
-                          title: Text(chats[index].email ?? "No email",
+                          title: Text(chats[index].email,
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Text(
-                              chats[index].firstName ?? "No first name",
+                          subtitle: Text(chats[index].firstName,
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           trailing: Text(chats[index].id.toString()),
@@ -121,18 +113,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
             ),
-            ListView.builder(
-              itemCount: status.length,
-              itemBuilder: (BuildContext context, index) {
-                return UserListTile(
-                    text: status[index], icon: Icons.account_circle);
-              },
+            UserListviewbuilder(
+              status: ["Status 1", "Status 2", "Status 3"],
+              icon: Icons.account_circle,
             ),
-            ListView.builder(
-              itemCount: calls.length,
-              itemBuilder: (BuildContext context, index) {
-                return UserListTile(text: calls[index], icon: Icons.call);
-              },
+            UserListviewbuilder(
+              status: ["Call 1", "Call 2", "Call 3"],
+              icon: Icons.call,
             ),
           ],
         ),

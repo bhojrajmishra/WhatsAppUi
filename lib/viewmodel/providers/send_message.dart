@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SendMessageModel extends ChangeNotifier {
+class SendMessage extends ChangeNotifier {
   final TextEditingController controller = TextEditingController();
   final List<String> messages = [];
   bool isUserMessage = true;

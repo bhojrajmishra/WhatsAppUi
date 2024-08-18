@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_first_ui/utils/constants.dart';
+import 'package:flutter_first_ui/utils/api_path.dart';
 
 class HomeScreenModel extends ChangeNotifier {
   List<dynamic> chats = [];

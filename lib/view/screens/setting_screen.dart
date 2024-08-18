@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/providers/theme_mode_model.dart';
+import 'package:flutter_first_ui/viewmodel/providers/theme_mode.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {

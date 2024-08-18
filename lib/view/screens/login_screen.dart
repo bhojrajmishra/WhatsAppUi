@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_first_ui/components/custom_text_field.dart';
-import 'package:flutter_first_ui/screens/home_screen.dart';
-import 'package:flutter_first_ui/screens/registration_screen.dart';
-import 'package:flutter_first_ui/utils/constants.dart';
+import 'package:flutter_first_ui/view/components/custom_text_field.dart';
+import 'package:flutter_first_ui/view/screens/home_screen.dart';
+import 'package:flutter_first_ui/view/screens/registration_screen.dart';
+import 'package:flutter_first_ui/utils/api_path.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

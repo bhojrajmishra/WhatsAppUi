@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/components/message_bubble.dart';
-import 'package:flutter_first_ui/components/message_input_row.dart';
-import 'package:flutter_first_ui/providers/send_message.dart';
+import 'package:flutter_first_ui/view/components/message_bubble.dart';
+import 'package:flutter_first_ui/view/components/message_input_row.dart';
+import 'package:flutter_first_ui/viewmodel/providers/send_message.dart';
 import 'package:provider/provider.dart'; // Assuming you have this widget
 
 class ChatScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sendMessageModel = context.watch<SendMessageModel>();
+    final sendMessageModel = context.watch<SendMessage>();
     return Scaffold(
       appBar: AppBar(
         title: Text(

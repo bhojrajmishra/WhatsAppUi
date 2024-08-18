@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class UserList {
   final int id;
   final String email;
