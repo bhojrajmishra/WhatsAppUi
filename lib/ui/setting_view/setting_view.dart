@@ -22,7 +22,7 @@ class _SettingViewState extends State<SettingView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Theme Mode"),
+            const Text("Theme Mode"),
             Row(
               children: [
                 Switch(
@@ -30,7 +30,7 @@ class _SettingViewState extends State<SettingView> {
                     onChanged: (value) {
                       themeProvider.updateMode(darkMode: value);
                     }),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Text(themeProvider.isDarkMode ? "Dark Mode" : "Light Mode"),

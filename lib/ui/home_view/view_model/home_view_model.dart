@@ -13,6 +13,7 @@ class HomeViewModel extends ChangeNotifier {
       Response response = await Dio().get(ApiPath.userListUrl);
       chats = response.data['data'];
     } catch (e) {
+      debugPrint('Error: $e');
     } finally {
       isLoading = false;
       notifyListeners();

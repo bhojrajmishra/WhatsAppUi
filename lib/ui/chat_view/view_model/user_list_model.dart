@@ -12,7 +12,6 @@ class UserListModel {
     required this.lastName,
     required this.avatar,
   });
-
   // Convert a JSON map into a UserList object
   UserListModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginView(),
+        home: const LoginView(),
         theme: themeProvider.isDarkMode
             ? CustomTheme.darkTheme()
             : CustomTheme.lightTheme(),

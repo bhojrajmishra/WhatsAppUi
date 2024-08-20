@@ -11,7 +11,6 @@ class ChatListView extends StatelessWidget {
     required this.chats,
     required this.onRefresh,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(

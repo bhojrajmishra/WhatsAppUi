@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/utils/api_path.dart';
 
 class LoginService {
-  static Future<bool> login(
-      String email, String password, BuildContext context) async {
+  static Future<bool> login(String email, String password) async {
     final payload = {
       'username': email,
       'password': password,
@@ -20,13 +19,9 @@ class LoginService {
           },
         ),
       );
-
       return response.statusCode == 200;
     } catch (e) {
       debugPrint('Error: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred: $e')),
-      );
       return false;
     }
   }

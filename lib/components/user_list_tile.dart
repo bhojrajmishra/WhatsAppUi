@@ -11,7 +11,6 @@ class UserListTile extends StatelessWidget {
     required this.icon,
     this.onTap,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
