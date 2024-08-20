@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/view/components/user_list_tile.dart';
+import 'package:flutter_first_ui/components/user_list_tile.dart';
 
 class UserListviewbuilder extends StatefulWidget {
   final List<String> status;

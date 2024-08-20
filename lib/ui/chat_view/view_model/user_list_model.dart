@@ -1,11 +1,11 @@
-class UserList {
+class UserListModel {
   final int id;
   final String email;
   final String firstName;
   final String lastName;
   final String avatar;
 
-  UserList({
+  UserListModel({
     required this.id,
     required this.email,
     required this.firstName,
@@ -14,7 +14,7 @@ class UserList {
   });
 
   // Convert a JSON map into a UserList object
-  UserList.fromJson(Map<String, dynamic> json)
+  UserListModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         email = json['email'],
         firstName = json['first_name'],

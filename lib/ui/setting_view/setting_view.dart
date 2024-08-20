@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/viewmodel/providers/theme_mode.dart';
+import 'package:flutter_first_ui/themes/theme_model/theme_model.dart';
 import 'package:provider/provider.dart';
 
-class SettingScreen extends StatefulWidget {
-  const SettingScreen({super.key});
+class SettingView extends StatefulWidget {
+  const SettingView({super.key});
 
   @override
-  State<SettingScreen> createState() => _SettingScreenState();
+  State<SettingView> createState() => _SettingViewState();
 }
 
-class _SettingScreenState extends State<SettingScreen> {
+class _SettingViewState extends State<SettingView> {
   @override
   Widget build(BuildContext context) {
-    var themeProvider = context.watch<ThemeModeModel>();
+    var themeProvider = context.watch<ThemeModel>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
@@ -26,7 +26,7 @@ class _SettingScreenState extends State<SettingScreen> {
             Row(
               children: [
                 Switch(
-                    value: context.watch<ThemeModeModel>().isDarkMode,
+                    value: context.watch<ThemeModel>().isDarkMode,
                     onChanged: (value) {
                       themeProvider.updateMode(darkMode: value);
                     }),

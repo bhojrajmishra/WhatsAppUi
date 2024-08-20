@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/view/components/message_bubble.dart';
-import 'package:flutter_first_ui/view/components/message_input_row.dart';
-import 'package:flutter_first_ui/viewmodel/providers/send_message.dart';
-import 'package:provider/provider.dart'; // Assuming you have this widget
+import 'package:flutter_first_ui/components/user_app_bar.dart';
+import 'package:flutter_first_ui/ui/chat_view/view_model/chat_view_model.dart';
+import 'package:flutter_first_ui/ui/chat_view/widgets/message_bubble.dart';
+import 'package:flutter_first_ui/ui/chat_view/widgets/message_input_row.dart';
+import 'package:provider/provider.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatView extends StatelessWidget {
   final String title;
-
-  const ChatScreen({super.key, required this.title});
-
+  const ChatView({super.key, required this.title});
   @override
   Widget build(BuildContext context) {
-    final sendMessageModel = context.watch<SendMessage>();
+    final sendMessageModel = context.watch<ChatViewModel>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          title,
-          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-        ),
+      appBar: UserAppBar(
+        title: title,
         backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.secondary,
         actions: [
           IconButton(
             icon: const Icon(Icons.attach_file_outlined),
