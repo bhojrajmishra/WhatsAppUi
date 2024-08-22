@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
 import 'package:flutter_first_ui/ui/home_view/widgets/custom_button.dart';
-import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
 import 'package:flutter_first_ui/ui/registration_view/widgets/registration_link.dart';
-import 'package:provider/provider.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -15,7 +15,6 @@ class LoginView extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (context) => LoginViewModel(
-        context: context,
         emailController: emailController,
         passwordController: passwordController,
       ),
@@ -44,7 +43,7 @@ class LoginView extends StatelessWidget {
                     const SizedBox(height: 23),
                     CustomButton(
                       text: "Login",
-                      onPressed: () => viewModel.handleLogin(),
+                      onPressed: () => viewModel.handleLogin(context),
                     ),
                     const SizedBox(height: 20),
                     const RegistrationLink(),

@@ -3,18 +3,16 @@ import 'package:flutter_first_ui/ui/login_view/services/login_service.dart';
 import 'package:flutter_first_ui/ui/home_view/home_view.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  final BuildContext context;
-  TextEditingController emailController;
-  TextEditingController passwordController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   LoginViewModel({
-    required this.context,
     required this.emailController,
     required this.passwordController,
   });
 
-  Future<void> handleLogin() async {
-    if (_validateForm()) {
+  Future<void> handleLogin(BuildContext context) async {
+    if (_validateForm(context)) {
       final email = emailController.text;
       final password = passwordController.text;
 
@@ -39,7 +37,7 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
-  bool _validateForm() {
+  bool _validateForm(BuildContext context) {
     if (emailController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Email is required')),
