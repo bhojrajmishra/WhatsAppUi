@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_first_ui/utils/api_path.dart';
+import 'package:flutter_first_ui/ui/chat_view/view_model/user_list_model.dart';
+import 'package:flutter_first_ui/ui/home_view/services/home_services.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  List<dynamic> chats = [];
+  final HomeService _homeService = HomeService();
+  List<UserListModel> chats = [];
   bool isLoading = false;
 
   Future<void> fetchUserList() async {
     isLoading = true;
     notifyListeners();
     try {
-      Response response = await Dio().get(ApiPath.userListUrl);
-      chats = response.data['data'];
+      chats = await _homeService.fetchUserList();
     } catch (e) {
       debugPrint('Error: $e');
     } finally {

@@ -12,71 +12,69 @@ class RegistrationView extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final nameController = TextEditingController();
-    return ChangeNotifierProvider(
-      create: (context) => RegistrationViewModel(
-        context: context,
-        emailController: emailController,
-        passwordController: passwordController,
-        nameController: nameController,
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Registration Page"),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginView()),
-              );
-            },
-          ),
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Registration Page"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginView()),
+            );
+          },
         ),
-        body: Consumer<RegistrationViewModel>(
-          builder: (context, viewModel, child) {
-            return Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: GlobalKey<FormState>(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 100, width: 100),
-                            CustomTextFormField(
-                              controller: nameController,
-                              labelText: "Full Name",
-                              obscureText: false,
+      ),
+      body: Consumer<RegistrationViewModel>(
+        builder: (context, viewModel, child) {
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: GlobalKey<FormState>(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 100, width: 100),
+                          CustomTextFormField(
+                            controller: nameController,
+                            labelText: "Full Name",
+                            obscureText: false,
+                          ),
+                          const SizedBox(height: 23),
+                          CustomTextFormField(
+                            controller: emailController,
+                            labelText: "Email",
+                            obscureText: false,
+                          ),
+                          const SizedBox(height: 23),
+                          CustomTextFormField(
+                            controller: passwordController,
+                            labelText: "Password",
+                            obscureText: true,
+                          ),
+                          const SizedBox(height: 23),
+                          CustomButton(
+                            text: "Register",
+                            onPressed: () => viewModel.handleRegistration(
+                              context,
+                              nameController.text,
+                              emailController.text,
+                              passwordController.text,
                             ),
-                            const SizedBox(height: 23),
-                            CustomTextFormField(
-                              controller: emailController,
-                              labelText: "Email",
-                              obscureText: false,
-                            ),
-                            const SizedBox(height: 23),
-                            CustomTextFormField(
-                              controller: passwordController,
-                              labelText: "Password",
-                              obscureText: true,
-                            ),
-                            const SizedBox(height: 23),
-                            CustomButton(
-                              text: "Register",
-                              onPressed: () => viewModel.handleRegistration(),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

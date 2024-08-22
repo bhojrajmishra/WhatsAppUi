@@ -3,24 +3,9 @@ import 'package:flutter_first_ui/ui/registration_view/services/registration_serv
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 
 class RegistrationViewModel extends ChangeNotifier {
-  final BuildContext context;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final TextEditingController nameController;
-
-  RegistrationViewModel({
-    required this.context,
-    required this.emailController,
-    required this.passwordController,
-    required this.nameController,
-  });
-
-  Future<void> handleRegistration() async {
-    if (_validateForm()) {
-      final email = emailController.text;
-      final password = passwordController.text;
-      final name = nameController.text;
-
+  Future<void> handleRegistration(
+      BuildContext context, String email, String password, String name) async {
+    if (_validateForm(context, email, password, name)) {
       bool success = await RegistrationService.register(email, name, password);
 
       if (context.mounted) {
@@ -30,7 +15,7 @@ class RegistrationViewModel extends ChangeNotifier {
           );
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const LoginView()),
+            MaterialPageRoute(builder: (context) => LoginView()),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -41,8 +26,9 @@ class RegistrationViewModel extends ChangeNotifier {
     }
   }
 
-  bool _validateForm() {
-    if (emailController.text.isEmpty) {
+  bool _validateForm(
+      BuildContext context, String email, String password, String name) {
+    if (email.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Email is required')),
       );

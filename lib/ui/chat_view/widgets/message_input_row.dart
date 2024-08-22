@@ -23,7 +23,7 @@ class MessageInputRow extends StatelessWidget {
                 ),
                 hintText: "Message",
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: onSendMessage,
                 ),
               ),
@@ -34,8 +34,8 @@ class MessageInputRow extends StatelessWidget {
             child: FloatingActionButton(
               backgroundColor: const Color.fromARGB(255, 16, 83, 18),
               onPressed: () {},
-              child: Icon(Icons.mic_rounded, color: Colors.white),
-              shape: CircleBorder(),
+              shape: const CircleBorder(),
+              child: const Icon(Icons.mic_rounded, color: Colors.white),
             ),
           ),
         ],

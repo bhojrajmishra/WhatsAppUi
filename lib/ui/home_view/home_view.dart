@@ -1,63 +1,31 @@
-import 'package:dio/dio.dart';
+// lib/ui/home_view/home_view.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/chat_list_view.dart';
 import 'package:flutter_first_ui/components/user_app_bar.dart';
 import 'package:flutter_first_ui/components/user_listviewbuilder.dart';
-import 'package:flutter_first_ui/ui/chat_view/view_model/user_list_model.dart';
-import 'package:flutter_first_ui/ui/home_view/view_model/loading_view_model.dart';
+import 'package:flutter_first_ui/ui/home_view/view_model/home_view_model.dart';
 import 'package:flutter_first_ui/ui/setting_view/setting_view.dart';
-import 'package:flutter_first_ui/utils/api_path.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<UserListModel> chats = [];
-
   @override
   void initState() {
     super.initState();
-    // Schedule fetchUserList to run after the build phase
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      fetchUserList();
+      context.read<HomeViewModel>().fetchUserList();
     });
-  }
-
-  Future<void> fetchUserList() async {
-    final loadingScreen = context.read<LoadingViewModel>();
-    loadingScreen.updateLoading(loading: true);
-
-    try {
-      Response response = await Dio().get(ApiPath.userListUrl);
-      final data = response.data['data'] as List<dynamic>;
-      final parsed = data
-          .map<UserListModel>(
-              (json) => UserListModel.fromJson(json as Map<String, dynamic>))
-          .toList();
-
-      if (mounted) {
-        setState(() {
-          chats = parsed;
-          loadingScreen.updateLoading(loading: false);
-        });
-      }
-    } catch (e) {
-      debugPrint('Error: $e');
-      if (mounted) {
-        loadingScreen.updateLoading(loading: false);
-      }
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final loadingScreen = context.watch<LoadingViewModel>();
-
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -86,20 +54,27 @@ class _HomeViewState extends State<HomeView> {
             indicatorColor: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
-        body: TabBarView(
-          children: [
-            loadingScreen.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : ChatListView(chats: chats, onRefresh: fetchUserList),
-            UserListviewbuilder(
-              status: const ["Status 1", "Status 2", "Status 3"],
-              icon: Icons.account_circle,
-            ),
-            UserListviewbuilder(
-              status: const ["Call 1", "Call 2", "Call 3"],
-              icon: Icons.call,
-            ),
-          ],
+        body: Consumer<HomeViewModel>(
+          builder: (context, viewModel, child) {
+            return TabBarView(
+              children: [
+                viewModel.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ChatListView(
+                        chats: viewModel.chats,
+                        onRefresh: viewModel.fetchUserList,
+                      ),
+                UserListviewbuilder(
+                  status: const ["Status 1", "Status 2", "Status 3"],
+                  icon: Icons.account_circle,
+                ),
+                UserListviewbuilder(
+                  status: const ["Call 1", "Call 2", "Call 3"],
+                  icon: Icons.call,
+                ),
+              ],
+            );
+          },
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
