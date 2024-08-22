@@ -4,7 +4,8 @@ class MessageBubble extends StatelessWidget {
   final String message;
   final bool isUserMessage;
 
-  MessageBubble({Key? key, required this.message, required this.isUserMessage})
+  const MessageBubble(
+      {Key? key, required this.message, required this.isUserMessage})
       : super(key: key);
 
   @override
@@ -17,10 +18,11 @@ class MessageBubble extends StatelessWidget {
         decoration: BoxDecoration(
           color: isUserMessage ? Colors.green : Colors.grey[300],
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-            bottomLeft: isUserMessage ? Radius.circular(12) : Radius.zero,
-            bottomRight: isUserMessage ? Radius.zero : Radius.circular(12),
+            topLeft: const Radius.circular(12),
+            topRight: const Radius.circular(12),
+            bottomLeft: isUserMessage ? const Radius.circular(12) : Radius.zero,
+            bottomRight:
+                isUserMessage ? Radius.zero : const Radius.circular(12),
           ),
         ),
         child: Text(

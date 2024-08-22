@@ -4,7 +4,6 @@ import 'package:flutter_first_ui/ui/home_view/view_model/loading_view_model.dart
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/themes/theme_model/theme_model.dart';
 import 'package:flutter_first_ui/themes/custom_theme.dart';
-import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,11 +13,6 @@ void main() {
         ChangeNotifierProvider.value(value: ChatViewModel()),
         ChangeNotifierProvider.value(value: ThemeModel()),
         ChangeNotifierProvider.value(value: LoadingViewModel()),
-        ChangeNotifierProvider(
-            create: (context) => LoginViewModel(
-                  emailController: TextEditingController(),
-                  passwordController: TextEditingController(),
-                )),
       ],
       child: const MyApp(),
     ),

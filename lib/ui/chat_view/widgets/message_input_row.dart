@@ -4,7 +4,7 @@ class MessageInputRow extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback onSendMessage;
 
-  MessageInputRow(
+  const MessageInputRow(
       {Key? key, required this.controller, required this.onSendMessage})
       : super(key: key);
 

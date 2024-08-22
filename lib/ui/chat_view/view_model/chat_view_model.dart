@@ -4,7 +4,6 @@ class ChatViewModel extends ChangeNotifier {
   final TextEditingController controller = TextEditingController();
   final List<String> messages = [];
   bool isUserMessage = true;
-
   void sendMessage() {
     if (controller.text.isNotEmpty) {
       messages.add(controller.text);

@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
   @override
   State<HomeView> createState() => _HomeViewState();
 }
@@ -18,9 +19,19 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   List<UserListModel> chats = [];
 
+  @override
+  void initState() {
+    super.initState();
+    // Schedule fetchUserList to run after the build phase
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchUserList();
+    });
+  }
+
   Future<void> fetchUserList() async {
     final loadingScreen = context.read<LoadingViewModel>();
     loadingScreen.updateLoading(loading: true);
+
     try {
       Response response = await Dio().get(ApiPath.userListUrl);
       final data = response.data['data'] as List<dynamic>;
@@ -28,24 +39,25 @@ class _HomeViewState extends State<HomeView> {
           .map<UserListModel>(
               (json) => UserListModel.fromJson(json as Map<String, dynamic>))
           .toList();
-      setState(() {
-        chats = parsed;
-        loadingScreen.updateLoading(loading: false);
-      });
+
+      if (mounted) {
+        setState(() {
+          chats = parsed;
+          loadingScreen.updateLoading(loading: false);
+        });
+      }
     } catch (e) {
       debugPrint('Error: $e');
+      if (mounted) {
+        loadingScreen.updateLoading(loading: false);
+      }
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserList();
   }
 
   @override
   Widget build(BuildContext context) {
     final loadingScreen = context.watch<LoadingViewModel>();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -80,11 +92,11 @@ class _HomeViewState extends State<HomeView> {
                 ? const Center(child: CircularProgressIndicator())
                 : ChatListView(chats: chats, onRefresh: fetchUserList),
             UserListviewbuilder(
-              status: ["Status 1", "Status 2", "Status 3"],
+              status: const ["Status 1", "Status 2", "Status 3"],
               icon: Icons.account_circle,
             ),
             UserListviewbuilder(
-              status: ["Call 1", "Call 2", "Call 3"],
+              status: const ["Call 1", "Call 2", "Call 3"],
               icon: Icons.call,
             ),
           ],
@@ -93,7 +105,7 @@ class _HomeViewState extends State<HomeView> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingView()),
+              MaterialPageRoute(builder: (context) => const SettingView()),
             );
           },
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
