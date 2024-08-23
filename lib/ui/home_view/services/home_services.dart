@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_first_ui/ui/chat_view/view_model/user_list_model.dart';
+import 'package:flutter_first_ui/ui/chat_view/models/user_list_model.dart';
 import 'package:flutter_first_ui/utils/api_path.dart';
 
 class HomeService {

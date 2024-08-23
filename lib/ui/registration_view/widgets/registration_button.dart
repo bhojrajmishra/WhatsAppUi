@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/registration_view/registration_view.dart';
 
-class RegistrationLink extends StatelessWidget {
-  const RegistrationLink({Key? key}) : super(key: key);
+class RegistrationButton extends StatelessWidget {
+  const RegistrationButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

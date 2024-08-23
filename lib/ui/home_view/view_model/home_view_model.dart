@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/ui/chat_view/view_model/user_list_model.dart';
+import 'package:flutter_first_ui/ui/chat_view/models/user_list_model.dart';
 import 'package:flutter_first_ui/ui/home_view/services/home_services.dart';
 
 class HomeViewModel extends ChangeNotifier {
