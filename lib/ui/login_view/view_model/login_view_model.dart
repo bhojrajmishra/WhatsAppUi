@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/home_view/view_model/loading_view_model.dart';
-import 'package:flutter_first_ui/ui/login_view/services/login_service.dart';
+import 'package:flutter_first_ui/ui/login_view/models/login_model.dart';
+
 import 'package:flutter_first_ui/ui/home_view/home_view.dart';
+import 'package:flutter_first_ui/ui/login_view/repository/login_repository.dart';
 import 'package:provider/provider.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final LoginRepository _loginRepository = LoginRepository();
 
   Future<void> handleLogin(BuildContext context) async {
     final email = emailController.text;
@@ -20,13 +23,13 @@ class LoginViewModel extends ChangeNotifier {
         Provider.of<LoadingViewModel>(context, listen: false);
     loadingViewModel.updateLoading(loading: true);
 
-    bool success = await LoginService.login(email, password);
+    LoginModel? loginResult = await _loginRepository.login(email, password);
 
     loadingViewModel.updateLoading(loading: false);
 
     if (!context.mounted) return;
 
-    if (success) {
+    if (loginResult != null) {
       _navigateToHome(context);
     } else {
       _showSnackBar(context, 'Login failed');
