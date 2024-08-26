@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//this is the custom text form field widget that will be used in the login and registration views to create the text fields for the user to input their data in the form fields  this class returns a text form field widget that takes in the following parameters   controller, labelText, obscureText, validator, enableSuggestions, autocorrect, keyboardType.
+
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
@@ -9,7 +11,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool autocorrect;
   final TextInputType keyboardType;
 
-  CustomTextFormField({
+  const CustomTextFormField({
     required this.controller,
     required this.labelText,
     required this.obscureText,

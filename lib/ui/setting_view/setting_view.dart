@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/themes/theme_model/theme_model.dart';
+import 'package:flutter_first_ui/themes/theme_model/theme_modification.dart';
 import 'package:provider/provider.dart';
 
 class SettingView extends StatefulWidget {
@@ -12,7 +12,7 @@ class SettingView extends StatefulWidget {
 class _SettingViewState extends State<SettingView> {
   @override
   Widget build(BuildContext context) {
-    var themeProvider = context.watch<ThemeModel>();
+    var themeProvider = context.watch<ThemeModification>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
@@ -26,7 +26,7 @@ class _SettingViewState extends State<SettingView> {
             Row(
               children: [
                 Switch(
-                    value: context.watch<ThemeModel>().isDarkMode,
+                    value: context.watch<ThemeModification>().isDarkMode,
                     onChanged: (value) {
                       themeProvider.updateMode(darkMode: value);
                     }),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/ui/home_view/view_model/loading_view_model.dart';
+import 'package:flutter_first_ui/constants/constants_validation.dart';
+import 'package:flutter_first_ui/base/loading_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
+import 'package:flutter_first_ui/ui/registration_view/models/registration_model.dart';
 import 'package:flutter_first_ui/ui/registration_view/repository%20/registor_repository.dart';
+import 'package:flutter_first_ui/ui/registration_view/repository%20/repository%20Implementation/registor_repository_implimentation.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationViewModel extends ChangeNotifier {
@@ -12,11 +15,11 @@ class RegistrationViewModel extends ChangeNotifier {
       RegistrationRepositoryImpl();
 
   Future<void> handleRegistration(BuildContext context) async {
+    final name = nameController.text;
     final email = emailController.text;
     final password = passwordController.text;
-    final name = nameController.text;
-    if (email.isEmpty || password.isEmpty || name.isEmpty) {
-      _showSnackBar(context, 'Please fill in all fields');
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      _showSnackBar(context, FormValidation.fillAllFields);
       return;
     }
 
@@ -24,15 +27,21 @@ class RegistrationViewModel extends ChangeNotifier {
         Provider.of<LoadingViewModel>(context, listen: false);
     loadingViewModel.updateLoading(loading: true);
 
-    bool success = await registrationRepository.register(email, name, password);
+    RegistrationModel model = RegistrationModel(
+      name: name,
+      email: email,
+      password: password,
+    );
+
+    bool success = await registrationRepository.register(model);
 
     loadingViewModel.updateLoading(loading: false);
 
     if (context.mounted) {
       if (success) {
-        _navigateToHome(context);
+        _navigateToLogin(context);
       } else {
-        _showSnackBar(context, 'Registration failed');
+        _showSnackBar(context, FormValidation.registrationFailed);
       }
     }
   }
@@ -45,11 +54,11 @@ class RegistrationViewModel extends ChangeNotifier {
     }
   }
 
-  void _navigateToHome(BuildContext context) {
+  void _navigateToLogin(BuildContext context) {
     if (context.mounted) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginView()),
+        MaterialPageRoute(builder: (context) => LoginView()),
       );
     }
   }

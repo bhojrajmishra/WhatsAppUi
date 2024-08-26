@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/registration_view/view_model/registration_view_model.dart';
-
 import 'package:provider/provider.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
@@ -14,6 +13,7 @@ class RegistrationView extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final nameController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Registration Page"),
@@ -22,7 +22,7 @@ class RegistrationView extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const LoginView()),
+              MaterialPageRoute(builder: (context) => LoginView()),
             );
           },
         ),
@@ -34,7 +34,7 @@ class RegistrationView extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Form(
-                    key: GlobalKey<FormState>(),
+                    key: formKey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(

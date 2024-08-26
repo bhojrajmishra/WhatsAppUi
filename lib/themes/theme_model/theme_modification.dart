@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeModel with ChangeNotifier {
+class ThemeModification with ChangeNotifier {
   bool isDarkMode = false;
 
   void updateMode({required bool darkMode}) {
