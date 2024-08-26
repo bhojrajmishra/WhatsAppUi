@@ -6,7 +6,6 @@ import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/themes/theme_model/theme_model.dart';
 import 'package:flutter_first_ui/themes/custom_theme.dart';
 import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
-import 'package:flutter_first_ui/ui/registration_view/models/registration_model.dart';
 import 'package:flutter_first_ui/ui/registration_view/view_model/registration_view_model.dart';
 import 'package:provider/provider.dart';
 

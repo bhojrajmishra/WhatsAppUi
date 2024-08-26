@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class LoginViewModel extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final LoginRepository _loginRepository = LoginRepository();
+  final LoginRepository _loginRepository = LoginRepositoryImpl();
 
   Future<void> handleLogin(BuildContext context) async {
     final email = emailController.text;

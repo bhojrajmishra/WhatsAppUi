@@ -9,7 +9,7 @@ class RegistrationViewModel extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final RegistrationRepository registrationRepository =
-      RegistrationRepository();
+      RegistrationRepositoryImpl();
 
   Future<void> handleRegistration(BuildContext context) async {
     final email = emailController.text;
