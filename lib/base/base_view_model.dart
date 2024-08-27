@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoadingViewModel extends ChangeNotifier {
+abstract class BaseViewModel extends ChangeNotifier {
   bool isLoading = false;
 
   void updateLoading({required bool loading}) {

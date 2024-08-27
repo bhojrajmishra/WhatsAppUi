@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool enableSuggestions;
   final bool autocorrect;
   final TextInputType keyboardType;
+  final VoidCallback? onpressed;
 
   const CustomTextFormField({
     required this.controller,
@@ -19,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.enableSuggestions = true,
     this.autocorrect = true,
     this.keyboardType = TextInputType.text,
+    this.onpressed,
   });
 
   @override
@@ -31,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
       autocorrect: autocorrect,
       keyboardType: keyboardType,
       validator: validator,
+      onTap: onpressed,
       decoration: InputDecoration(
         labelText: labelText,
       ),

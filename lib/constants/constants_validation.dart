@@ -1,5 +1,5 @@
-class FormValidation {
-  static const String fillAllFields = 'Please fill in all fields';
-  static const String registrationFailed = 'registration failed';
-  static const String loginFailed = 'login failed';
+class ConstantsValidation {
+  static const String fillAllFieldsMessage = 'Please fill in all fields';
+  static const String registrationFailedMessage = 'registration failed';
+  static const String loginFailedMessage = 'login failed';
 }

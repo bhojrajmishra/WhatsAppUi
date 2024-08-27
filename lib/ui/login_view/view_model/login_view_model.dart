@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/constants/constants_validation.dart';
-import 'package:flutter_first_ui/base/loading_view_model.dart';
+import 'package:flutter_first_ui/base/base_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_model.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response_model.dart';
 import 'package:flutter_first_ui/ui/home_view/home_view.dart';
 import 'package:flutter_first_ui/ui/login_view/repository/login_repository.dart';
 import 'package:flutter_first_ui/ui/login_view/repository/repository%20implementation/login_repository_implementation.dart';
-import 'package:provider/provider.dart';
 
-class LoginViewModel extends ChangeNotifier {
+class LoginViewModel extends BaseViewModel {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final LoginRepository _loginRepository = LoginRepositoryImpl();
@@ -16,18 +15,19 @@ class LoginViewModel extends ChangeNotifier {
   Future<void> requestLoginApi(BuildContext context) async {
     final email = emailController.text;
     final password = passwordController.text;
+
     if (email.isEmpty || password.isEmpty) {
-      _showSnackBar(context, FormValidation.fillAllFields);
+      _showSnackBar(context, ConstantsValidation.fillAllFieldsMessage);
       return;
     }
-    final loadingViewModel =
-        Provider.of<LoadingViewModel>(context, listen: false);
-    loadingViewModel.updateLoading(loading: true);
+
+    updateLoading(loading: true);
 
     LoginModel loginModel = LoginModel(email: email, password: password);
-    LoginResponseModel? loginResult = await _loginRepository.login(loginModel);
+    LoginResponseModel? loginResult =
+        await _loginRepository.requestLoginApi(loginModel);
 
-    loadingViewModel.updateLoading(loading: false);
+    updateLoading(loading: false);
 
     if (!context.mounted) return;
 
@@ -35,20 +35,17 @@ class LoginViewModel extends ChangeNotifier {
       _handleSuccessfulLogin(loginResult);
       _navigateToHome(context);
     } else {
-      _showSnackBar(context, FormValidation.loginFailed);
+      _showSnackBar(context, ConstantsValidation.loginFailedMessage);
     }
   }
 
   void _handleSuccessfulLogin(LoginResponseModel loginResponse) {
     // Here you can handle the successful login
-    // For example, you might want to store the token or user information
-    // You could use SharedPreferences or some other storage mechanism
     debugPrint('Logged in as: ${loginResponse.fullName}');
     debugPrint('Token: ${loginResponse.token}');
     // Add more handling as needed
   }
 
-//this function is used to show snackbar where message is passed as parameter
   void _showSnackBar(BuildContext context, String message) {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -57,7 +54,6 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
-//this function is used to navigate to home page
   void _navigateToHome(BuildContext context) {
     if (context.mounted) {
       Navigator.pushReplacement(

@@ -1,3 +1,5 @@
+//this is the user list model that will be used in the home view to create the user list that will be displayed in the app
+
 class UserListModel {
   final int id;
   final String email;

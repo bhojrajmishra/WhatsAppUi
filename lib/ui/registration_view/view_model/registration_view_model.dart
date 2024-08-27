@@ -1,47 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/constants/constants_validation.dart';
-import 'package:flutter_first_ui/base/loading_view_model.dart';
+import 'package:flutter_first_ui/base/base_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_model.dart';
 import 'package:flutter_first_ui/ui/registration_view/repository%20/registor_repository.dart';
 import 'package:flutter_first_ui/ui/registration_view/repository%20/repository%20Implementation/registor_repository_implimentation.dart';
 import 'package:provider/provider.dart';
 
-class RegistrationViewModel extends ChangeNotifier {
+class RegistrationViewModel extends BaseViewModel {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final RegistrationRepository registrationRepository =
       RegistrationRepositoryImpl();
 
-  Future<void> handleRegistration(BuildContext context) async {
+  Future<void> requestRegistrationApi(BuildContext context) async {
     final name = nameController.text;
     final email = emailController.text;
     final password = passwordController.text;
+
     if (name.isEmpty || email.isEmpty || password.isEmpty) {
-      _showSnackBar(context, FormValidation.fillAllFields);
+      _showSnackBar(context, ConstantsValidation.fillAllFieldsMessage);
       return;
     }
 
-    final loadingViewModel =
-        Provider.of<LoadingViewModel>(context, listen: false);
-    loadingViewModel.updateLoading(loading: true);
+    updateLoading(loading: true); // Use the inherited method
 
-    RegistrationModel model = RegistrationModel(
-      name: name,
-      email: email,
-      password: password,
-    );
+    RegistrationModel model =
+        RegistrationModel(name: name, email: email, password: password);
 
     bool success = await registrationRepository.register(model);
 
-    loadingViewModel.updateLoading(loading: false);
+    updateLoading(loading: false); // Use the inherited method
 
     if (context.mounted) {
       if (success) {
         _navigateToLogin(context);
       } else {
-        _showSnackBar(context, FormValidation.registrationFailed);
+        _showSnackBar(context, ConstantsValidation.registrationFailedMessage);
       }
     }
   }

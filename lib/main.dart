@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/themes/theme_model/theme_modification.dart';
 import 'package:flutter_first_ui/ui/chat_view/view_model/chat_view_model.dart';
 import 'package:flutter_first_ui/ui/home_view/view_model/home_view_model.dart';
-import 'package:flutter_first_ui/base/loading_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/themes/custom_theme.dart';
 import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
@@ -15,7 +14,6 @@ void main() {
       providers: [
         ChangeNotifierProvider.value(value: ChatViewModel()),
         ChangeNotifierProvider.value(value: ThemeModification()),
-        ChangeNotifierProvider.value(value: LoadingViewModel()),
         ChangeNotifierProvider(create: (_) => HomeViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => RegistrationViewModel()),
