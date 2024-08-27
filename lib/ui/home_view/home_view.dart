@@ -1,4 +1,3 @@
-// lib/ui/home_view/home_view.dart
 
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/chat_list_view.dart';

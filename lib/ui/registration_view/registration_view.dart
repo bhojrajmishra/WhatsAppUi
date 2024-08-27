@@ -61,7 +61,7 @@ class RegistrationView extends StatelessWidget {
                               text: "Register",
                               onPressed: () {
                                 if (formKey.currentState?.validate() ?? false) {
-                                  viewModel.requestRegistrationApi(context);
+                                  viewModel.requestRegisterApi(context);
                                 }
                               },
                             ),

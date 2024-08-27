@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//this class is used to define the theme of the app
 class CustomTheme {
   static ThemeData lightTheme() {
     return ThemeData(
@@ -12,6 +13,7 @@ class CustomTheme {
     );
   }
 
+//this is used to define the dark theme of the app when the user switches to dark mode
   static ThemeData darkTheme() {
     return ThemeData(
       colorScheme: ColorScheme.dark(

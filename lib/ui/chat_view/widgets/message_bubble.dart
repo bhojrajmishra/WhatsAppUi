@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+///this class is MessageBubble which is used to show the message in the chat extends the stateless widget
+///it returns the align widget which aligns the message to the right or left based on the isUserMessage
+///if the isUserMessage is true then align the message to the right else align the message to the left
+///if the isUserMessage is true then the color of the message is green else the color of the message is grey
+///the text widget which shows the message in the chat
 class MessageBubble extends StatelessWidget {
   final String message;
   final bool isUserMessage;

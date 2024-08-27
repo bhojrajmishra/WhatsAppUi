@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+//this is the user list tile widget which is used to display the user list in the list view
+//the user view screen this has the text, icon, and onTap function as the parameters
+//and returns the list tile with the text, icon, and onTap function.
+
 class UserListTile extends StatelessWidget {
   final String text;
   final IconData icon;

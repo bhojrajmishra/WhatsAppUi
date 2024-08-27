@@ -5,7 +5,8 @@ import 'package:flutter_first_ui/ui/login_view/models/login_response_model.dart'
 import 'package:flutter_first_ui/utils/api_path.dart';
 
 class LoginService {
-  static Future<LoginResponseModel?> login(LoginModel loginModel) async {
+  static Future<LoginResponseModel?> requestLoginApi(
+      LoginModel loginModel) async {
     final payload = {
       'username': loginModel.email,
       'password': loginModel.password,

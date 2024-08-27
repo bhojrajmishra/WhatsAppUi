@@ -1,10 +1,10 @@
 class RegistrationModel {
-  final String name;
+  final String fullname;
   final String email;
   final String password;
 
   RegistrationModel({
-    required this.name,
+    required this.fullname,
     required this.email,
     required this.password,
   });
@@ -12,7 +12,7 @@ class RegistrationModel {
   // Convert a JSON map into a LoginModel object
   factory RegistrationModel.fromJson(Map<String, dynamic> json) {
     return RegistrationModel(
-      name: json['name'] ?? '',
+      fullname: json['full_name'] ?? '',
       email: json['email'] ?? '',
       password: json['password'] ?? '',
     );
@@ -21,7 +21,7 @@ class RegistrationModel {
   // Convert a LoginModel object into a JSON map
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'full_name': fullname,
       'email': email,
       'password': password,
     };
