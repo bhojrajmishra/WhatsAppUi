@@ -9,8 +9,8 @@ class RegistrationService {
       RegistrationModel registrationModel) async {
     final payload = {
       'email': registrationModel.email,
-      'password': registrationModel.password,
       'full_name': registrationModel.fullname,
+      'password': registrationModel.password,
     };
     debugPrint("Payload: $payload");
     try {

@@ -1,26 +1,53 @@
 import 'package:flutter/material.dart';
 
-///this is the custom text form field widget that will be used in the login
-///and registration views to create the text fields for the user to input their data in the form fields
-///this class returns a text form field widget that takes in the following parameterscontroller, labelText, obscureText, validator, enableSuggestions, autocorrect, keyboardType.
-///for eg: CustomTextFormField(
-///                     controller: johndoe@gmail.com,
-///                  labelText: "Email",
-///                 obscureText: false,
-///                validator: (value) {
-///                  if (value!.isEmpty) {
-///                   return "Please enter email";
-///               }
-///              return null;
-///          },
-
+/// A custom text form field widget that wraps a [TextFormField] with commonly used configurations.
+///
+/// This widget is intended to be used in forms such as login or registration, where specific text input
+/// fields (like email, password, etc.) are required.
+///
+/// The widget provides additional customization options through its parameters [controller], [labelText], [obscureText], [validator], [enableSuggestions],[autocorrect],[keyboardType] ,  allowing you to control
+/// aspects such as text obscuring, validation, and input type.
+///
+/// ### Example:
+///
+/// ```dart
+/// CustomTextFormField(
+///   controller: TextEditingController(),
+///   labelText: "Email",
+///   obscureText: false,
+///   validator: (value) {
+///     if (value!.isEmpty) {
+///       return "Please enter email";
+///     }
+///     return null;
+///   },
+///   enableSuggestions: true,
+///   autocorrect: true,
+///   keyboardType: TextInputType.emailAddress,
+/// )
+/// ```
+///
+/// The above example creates a text field for an email input with validation for empty fields.
 class CustomTextFormField extends StatelessWidget {
+  /// Controls the text being edited.
   final TextEditingController controller;
+
+  /// The label text displayed above the text field.
   final String labelText;
-  final bool? obscureText;
+
+  /// Whether the text should be obscured (e.g., for passwords).
+  final bool obscureText;
+
+  /// An optional validation function to validate the text field input.
   final FormFieldValidator<String>? validator;
+
+  /// Whether suggestions for input are shown, default is true.
   final bool enableSuggestions;
+
+  /// Whether autocorrect is enabled, default is true.
   final bool autocorrect;
+
+  /// The type of keyboard to use for the text field.
   final TextInputType keyboardType;
 
   const CustomTextFormField({
@@ -33,12 +60,14 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
   });
 
+  /// Builds the text form field with the provided parameters.
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      autovalidateMode:
+          AutovalidateMode.onUserInteraction, // Validate on user interaction
       controller: controller,
-      obscureText: obscureText!,
+      obscureText: obscureText, // Ensure obscureText is not null
       enableSuggestions: enableSuggestions,
       autocorrect: autocorrect,
       keyboardType: keyboardType,

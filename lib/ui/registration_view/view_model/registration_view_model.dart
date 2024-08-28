@@ -15,10 +15,10 @@ class RegistrationViewModel extends BaseViewModel {
       RegistrationRepositoryImpl();
 
   Future<void> requestRegisterApi(BuildContext context) async {
-    final full_name = nameController.text;
+    final fullname = nameController.text;
     final email = emailController.text;
     final password = passwordController.text;
-    if (full_name.isEmpty || email.isEmpty || password.isEmpty) {
+    if (fullname.isEmpty || email.isEmpty || password.isEmpty) {
       _showSnackBar(context, ConstantsValidation.fillAllFieldsMessage);
       return;
     }
@@ -26,7 +26,7 @@ class RegistrationViewModel extends BaseViewModel {
     updateLoading(loading: true);
 
     RegistrationModel registrationModel = RegistrationModel(
-      fullname: full_name,
+      fullname: fullname,
       email: email,
       password: password,
     );

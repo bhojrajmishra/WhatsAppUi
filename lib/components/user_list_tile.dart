@@ -1,28 +1,52 @@
 import 'package:flutter/material.dart';
 
-//this is the user list tile widget which is used to display the user list in the list view
-//the user view screen this has the text, icon, and onTap function as the parameters
-//and returns the list tile with the text, icon, and onTap function.
-
+/// A custom list tile widget that displays a [ListTile] with an icon, text, and an optional onTap function.
+///
+/// This widget can be used in a user view screen or any other screen where you need a simple list tile
+/// with an icon and text. The [UserListTile] takes [text], [icon], and [onTap] as parameters
+/// and returns a [ListTile] with the specified properties.
+///
+/// ### Example:
+/// ```dart
+/// UserListTile(
+///   text: 'Settings',
+///   icon: Icons.settings,
+///   onTap: () {
+///     // Handle tap event
+///   },
+/// )
+/// ```
+///
+/// The above example creates a list tile with a settings icon and text, and handles the tap event.
 class UserListTile extends StatelessWidget {
+  /// The text to display in the list tile.
   final String text;
+
+  /// The icon to display at the start (leading) of the list tile.
   final IconData icon;
+
+  /// The function to execute when the list tile is tapped. This is optional.
   final VoidCallback? onTap;
 
+  /// Constructor for [UserListTile].
+  ///
+  /// The [text] and [icon] parameters are required, while [onTap] is optional.
   const UserListTile({
     Key? key,
     required this.text,
     required this.icon,
     this.onTap,
   }) : super(key: key);
+
+  /// Builds the [UserListTile] widget.
+  ///
+  /// This method returns a [ListTile] widget with the specified [text], [icon], and [onTap] function.
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: onTap,
-      title: Text(text),
-      leading: Icon(icon),
-      subtitle: Text(text),
-      trailing: Text(text),
+      onTap: onTap, // Handles the tap event if provided
+      title: Text(text), // The main text of the list tile
+      leading: Icon(icon), // The icon displayed at the start of the tile
     );
   }
 }
