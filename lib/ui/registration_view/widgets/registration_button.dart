@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/registration_view/registration_view.dart';
 
 class RegistrationButton extends StatelessWidget {
-  const RegistrationButton({Key? key}) : super(key: key);
+  const RegistrationButton({super.key});
 
   @override
   Widget build(BuildContext context) {

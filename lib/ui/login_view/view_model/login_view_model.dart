@@ -12,6 +12,8 @@ class LoginViewModel extends BaseViewModel {
   final TextEditingController passwordController = TextEditingController();
   final LoginRepository _loginRepository = LoginRepositoryImpl();
 
+  final finalKey = GlobalKey<FormState>();
+
   Future<void> requestLoginApi(BuildContext context) async {
     final email = emailController.text;
     final password = passwordController.text;
@@ -38,7 +40,7 @@ class LoginViewModel extends BaseViewModel {
       _showSnackBar(context, ConstantsValidation.loginFailedMessage);
     }
   }
-
+  
   void _handleSuccessfulLogin(LoginResponseModel loginResponse) {
     // Here you can handle the successful login
     debugPrint('Logged in as: ${loginResponse.fullName}');

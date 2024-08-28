@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/chat_list_view.dart';
 import 'package:flutter_first_ui/components/user_app_bar.dart';
@@ -8,8 +7,7 @@ import 'package:flutter_first_ui/ui/setting_view/setting_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
-
+  const HomeView({super.key});
   @override
   State<HomeView> createState() => _HomeViewState();
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// This widget returns an [AppBar] with customizable properties, including [title], [actions],
 /// [leading], [bottom], [backgroundColor], and [foregroundColor].
 ///
-/// ### Example:
+/// ### Example :
 /// ```dart
 /// UserAppBar(
 ///   title: 'Home',
@@ -40,14 +40,14 @@ class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
   ///
   /// All parameters except [title] are optional, with sensible defaults provided.
   const UserAppBar({
-    Key? key,
     required this.title,
     this.actions,
     this.leading,
     this.bottom,
     this.backgroundColor,
     this.foregroundColor,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Builds the custom app bar widget.
   ///

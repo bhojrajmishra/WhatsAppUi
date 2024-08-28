@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/utils/validator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_first_ui/ui/home_view/widgets/custom_button.dart';
 import 'package:flutter_first_ui/ui/registration_view/widgets/registration_button.dart';
 
 class LoginView extends StatelessWidget {
-  LoginView({Key? key}) : super(key: key);
+  LoginView({super.key});
 
   final finalKey = GlobalKey<FormState>();
 
@@ -27,12 +28,7 @@ class LoginView extends StatelessWidget {
                     controller: loginViewModel.emailController,
                     labelText: "Email",
                     obscureText: false,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please enter email";
-                      }
-                      return null;
-                    },
+                    validator: Validator.emailValidator(),
                   ),
                   const SizedBox(height: 23),
                   CustomTextFormField(

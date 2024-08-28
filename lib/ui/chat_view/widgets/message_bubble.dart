@@ -1,38 +1,56 @@
 import 'package:flutter/material.dart';
 
-///this class is MessageBubble which is used to show the message in the chat extends the stateless widget
-///it returns the align widget which aligns the message to the right or left based on the isUserMessage
-///if the isUserMessage is true then align the message to the right else align the message to the left
-///if the isUserMessage is true then the color of the message is green else the color of the message is grey
-///the text widget which shows the message in the chat
+/// A custom MessageBubble widget to display the message in the chat screen.
+/// The MessageBubble widget takes [message] and [isUserMessage] as parameters
+/// and returns a styled container with the message text.
+/// The [isUserMessage] parameter determines the alignment and color of the message.
+/// If [isUserMessage] is true, the message is aligned to the right and displayed in green.
+/// If [isUserMessage] is false, the message is aligned to the left and displayed in grey.
+/// This widget is used in the ChatView screen to display chat messages.
+/// Example:
+/// ```dart
+/// MessageBubble(
+///  message: 'Hello, how are you?',
+/// isUserMessage: true,
+/// )
+/// ```
+/// The above example creates a message bubble with the text 'Hello, how are you?' aligned to the right.
 class MessageBubble extends StatelessWidget {
+  // The message text to display in the bubble.
   final String message;
+  // A boolean value to determine if the message is sent by the user or received from another user.
   final bool isUserMessage;
-
-  const MessageBubble(
-      {Key? key, required this.message, required this.isUserMessage})
-      : super(key: key);
+  const MessageBubble({
+    required this.message,
+    required this.isUserMessage,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Align(
+      // Align the message bubble based on the user message status.
       alignment: isUserMessage ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
+        // Styling for the message bubble container.
         margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
+          // Set the background color and border radius based on the user message status.
           color: isUserMessage ? Colors.green : Colors.grey[300],
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(12),
             topRight: const Radius.circular(12),
             bottomLeft: isUserMessage ? const Radius.circular(12) : Radius.zero,
             bottomRight:
+                // Set the border radius based on the user message status.
                 isUserMessage ? Radius.zero : const Radius.circular(12),
           ),
         ),
         child: Text(
           message,
           style: TextStyle(
+            // Set the text color based on the user message status.
             color: isUserMessage ? Colors.white : Colors.black87,
           ),
         ),

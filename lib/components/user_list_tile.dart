@@ -32,11 +32,11 @@ class UserListTile extends StatelessWidget {
   ///
   /// The [text] and [icon] parameters are required, while [onTap] is optional.
   const UserListTile({
-    Key? key,
     required this.text,
     required this.icon,
     this.onTap,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Builds the [UserListTile] widget.
   ///

@@ -7,10 +7,10 @@ class ChatListView extends StatelessWidget {
   final VoidCallback onRefresh;
 
   const ChatListView({
-    Key? key,
     required this.chats,
     required this.onRefresh,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(

@@ -8,8 +8,7 @@ class CustomTheme {
   /// Defines the light theme of the app.
   ///
   /// This method returns a [ThemeData] object configured with a [ColorScheme.light].
-  /// The primary color is set to a shade of green, while the secondary and surface colors
-  /// are set to white.
+  /// The primary color is set to a shade of green, while the secondary and surface colors are set to white
   ///
   /// The [inversePrimary] color is also set to white, which is used when contrasting with
   /// a primary color that requires inversion in some UI elements.
@@ -30,7 +29,7 @@ class CustomTheme {
   ///
   /// This method returns a [ThemeData] object configured with a [ColorScheme.dark].
   /// The primary color remains the same as in the light theme, while the surface color
-  /// is set to black to suit dark mode. The secondary color is white, and the
+  /// set to black to suit dark mode. The secondary color is white, and the
   /// [inversePrimary] color is set to a light grey, providing a subtle contrast.
   static ThemeData darkTheme() {
     return ThemeData(

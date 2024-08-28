@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 
+/// A Custom MessageInputRow widget that display a row with textfield and a send button
+/// This widget can be used in a chat view screen or any other screen where you need a row with a textfield and a send button
+/// The [MessageInputRow] takes [controller] and [onSendMessage] as parameters and returns a row with the specified properties
+/// Example:
+///```dart
+///MessageInputRow(
+///  controller: controller,
+/// onSendMessage: sendMessage,
+/// )
+/// ```
+/// The above example creates a row with a textfield and a send button, and handles the send message event.
+///
 class MessageInputRow extends StatelessWidget {
+  //The controller for the text field
   final TextEditingController controller;
+  //The function to execute when the send button is pressed
   final VoidCallback onSendMessage;
-
-  const MessageInputRow(
-      {Key? key, required this.controller, required this.onSendMessage})
-      : super(key: key);
-
+  //Constructor for [MessageInputRow]
+  const MessageInputRow({
+    required this.controller,
+    required this.onSendMessage,
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
