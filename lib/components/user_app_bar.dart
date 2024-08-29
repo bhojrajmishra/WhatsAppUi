@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/themes/custom_theme.dart';
 
 /// A custom app bar widget that extends [StatelessWidget] and implements [PreferredSizeWidget].
 ///
@@ -61,9 +62,7 @@ class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: foregroundColor ?? Colors.white), // Default color is white
       ),
       backgroundColor: backgroundColor ??
-          Theme.of(context)
-              .colorScheme
-              .primary, // Uses primary color if not provided
+          CustomTheme.lightPrimaryColor, // Uses primary color if not provided
       actions: actions, // Optional action widgets
       leading: leading, // Optional leading widget
       bottom: bottom, // Optional bottom widget

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/ui/login_view/models/login_model.dart';
+import 'package:flutter_first_ui/ui/login_view/models/login_request.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';
 import 'package:flutter_first_ui/utils/api_path.dart';
 

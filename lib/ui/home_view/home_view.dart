@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/themes/custom_theme.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/chat_list_view.dart';
 import 'package:flutter_first_ui/components/user_app_bar.dart';
 import 'package:flutter_first_ui/components/user_listview_builder.dart';
@@ -32,13 +33,12 @@ class _HomeViewState extends State<HomeView> {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {},
-              color: Theme.of(context).colorScheme.inversePrimary,
+              color: CustomTheme.lightInversePrimaryColor,
             ),
             IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {},
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
+                icon: const Icon(Icons.more_vert),
+                onPressed: () {},
+                color: CustomTheme.lightInversePrimaryColor),
           ],
           bottom: TabBar(
             tabs: const [
@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
             ],
             labelColor: Theme.of(context).colorScheme.inversePrimary,
             unselectedLabelColor: Colors.grey,
-            indicatorColor: Theme.of(context).colorScheme.inversePrimary,
+            indicatorColor: CustomTheme.lightInversePrimaryColor,
           ),
         ),
         body: Consumer<HomeViewModel>(
@@ -81,8 +81,8 @@ class _HomeViewState extends State<HomeView> {
             );
           },
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
-          child: Icon(Icons.settings,
-              color: Theme.of(context).colorScheme.inversePrimary),
+          child:
+              Icon(Icons.settings, color: CustomTheme.lightInversePrimaryColor),
         ),
       ),
     );

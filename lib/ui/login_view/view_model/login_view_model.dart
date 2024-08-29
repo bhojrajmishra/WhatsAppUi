@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/constants/constants_validation.dart';
 import 'package:flutter_first_ui/base/base_view_model.dart';
-import 'package:flutter_first_ui/ui/login_view/models/login_model.dart';
+import 'package:flutter_first_ui/ui/login_view/models/login_request.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';
 import 'package:flutter_first_ui/ui/home_view/home_view.dart';
 import 'package:flutter_first_ui/ui/login_view/repository/login_repository.dart';

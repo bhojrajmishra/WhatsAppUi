@@ -2,45 +2,47 @@ import 'package:flutter/material.dart';
 
 /// A custom theme class that defines the light and dark themes for the application.
 ///
-/// This class provides two static methods, [lightTheme] and [darkTheme], which return
-/// [ThemeData] objects configured with specific color schemes for light and dark modes.
+/// This class provides static getters for accessing theme attributes and methods
+/// for creating light and dark [ThemeData] objects.
 class CustomTheme {
+  // Light theme color getters
+  static Color get lightSurfaceColor => Colors.white;
+  static Color get lightPrimaryColor => const Color.fromARGB(255, 16, 83, 18);
+  static Color get lightSecondaryColor => Colors.white;
+  static Color get lightInversePrimaryColor => Colors.white;
+
+  // Dark theme color getters
+  static Color get darkSurfaceColor => Colors.black;
+  static Color get darkPrimaryColor => const Color.fromARGB(255, 16, 83, 18);
+  static Color get darkSecondaryColor => Colors.white;
+  static Color get darkInversePrimaryColor => Colors.grey[400]!;
+
   /// Defines the light theme of the app.
   ///
-  /// This method returns a [ThemeData] object configured with a [ColorScheme.light].
-  /// The primary color is set to a shade of green, while the secondary and surface colors are set to white
-  ///
-  /// The [inversePrimary] color is also set to white, which is used when contrasting with
-  /// a primary color that requires inversion in some UI elements.
+  /// This method returns a [ThemeData] object configured with a [ColorScheme.light]
+  /// using the colors defined by the light theme getters.
   static ThemeData lightTheme() {
     return ThemeData(
-      colorScheme: const ColorScheme.light(
-        surface: Colors.white, // Background surface color for components
-        primary: Color.fromARGB(
-            255, 16, 83, 18), // Primary color used in the app's theme
-        secondary: Colors.white, // Secondary color, often used for accents
-        inversePrimary:
-            Colors.white, // Inverse of the primary color for contrast
+      colorScheme: ColorScheme.light(
+        surface: lightSurfaceColor,
+        primary: lightPrimaryColor,
+        secondary: lightSecondaryColor,
+        inversePrimary: lightInversePrimaryColor,
       ),
     );
   }
 
   /// Defines the dark theme of the app.
   ///
-  /// This method returns a [ThemeData] object configured with a [ColorScheme.dark].
-  /// The primary color remains the same as in the light theme, while the surface color
-  /// set to black to suit dark mode. The secondary color is white, and the
-  /// [inversePrimary] color is set to a light grey, providing a subtle contrast.
+  /// This method returns a [ThemeData] object configured with a [ColorScheme.dark]
+  /// using the colors defined by the dark theme getters.
   static ThemeData darkTheme() {
     return ThemeData(
       colorScheme: ColorScheme.dark(
-        surface: Colors
-            .black, // Background surface color for components in dark mode
-        primary: const Color.fromARGB(
-            255, 16, 83, 18), // Primary color remains consistent
-        secondary: Colors.white, // Secondary color for accents in dark mode
-        inversePrimary:
-            Colors.grey[400], // Light grey color for inverted elements
+        surface: darkSurfaceColor,
+        primary: darkPrimaryColor,
+        secondary: darkSecondaryColor,
+        inversePrimary: darkInversePrimaryColor,
       ),
     );
   }
