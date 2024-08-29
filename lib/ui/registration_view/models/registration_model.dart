@@ -1,17 +1,17 @@
-class RegistrationModel {
+class RegistrationRequest {
   final String fullname;
   final String email;
   final String password;
 
-  RegistrationModel({
+  RegistrationRequest({
     required this.fullname,
     required this.email,
     required this.password,
   });
 
   // Convert a JSON map into a LoginModel object
-  factory RegistrationModel.fromJson(Map<String, dynamic> json) {
-    return RegistrationModel(
+  factory RegistrationRequest.fromJson(Map<String, dynamic> json) {
+    return RegistrationRequest(
       fullname: json['full_name'] ?? '',
       email: json['email'] ?? '',
       password: json['password'] ?? '',

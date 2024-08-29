@@ -1,15 +1,15 @@
-class LoginModel {
+class LoginRequest {
   final String email;
   final String password;
 
-  LoginModel({
+  LoginRequest({
     required this.email,
     required this.password,
   });
 
   // Convert a JSON map into a LoginModel object
-  factory LoginModel.fromJson(Map<String, dynamic> json) {
-    return LoginModel(
+  factory LoginRequest.fromJson(Map<String, dynamic> json) {
+    return LoginRequest(
       email: json['email'] ?? '',
       password: json['password'] ?? '',
     );

@@ -1,4 +1,4 @@
-class LoginResponseModel {
+class LoginResponse {
   final String fullName;
   final String email;
   final int id;
@@ -7,7 +7,7 @@ class LoginResponseModel {
   final List<String> roles;
   final Map<String, dynamic> organizations;
 
-  LoginResponseModel({
+  LoginResponse({
     required this.fullName,
     required this.email,
     required this.id,
@@ -17,8 +17,8 @@ class LoginResponseModel {
     required this.organizations,
   });
 
-  factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    return LoginResponseModel(
+  factory LoginResponse.fromJson(Map<String, dynamic> json) {
+    return LoginResponse(
       fullName: json['full_name'],
       email: json['email'],
       id: json['id'],

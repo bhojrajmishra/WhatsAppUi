@@ -49,6 +49,8 @@ class CustomTextFormField extends StatelessWidget {
 
   /// The type of keyboard to use for the text field.
   final TextInputType keyboardType;
+
+  /// Constructor for [CustomTextFormField].
   const CustomTextFormField({
     required this.controller,
     required this.labelText,

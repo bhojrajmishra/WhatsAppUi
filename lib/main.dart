@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<ThemeModification>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginView(),
+      home: const LoginView(),
       theme: themeProvider.isDarkMode
           ? CustomTheme.darkTheme()
           : CustomTheme.lightTheme(),

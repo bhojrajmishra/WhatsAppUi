@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_model.dart';
-import 'package:flutter_first_ui/ui/login_view/models/login_response_model.dart';
+import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';
 import 'package:flutter_first_ui/utils/api_path.dart';
 
 class LoginService {
-  static Future<LoginResponseModel?> requestLoginApi(
-      LoginModel loginModel) async {
+  static Future<LoginResponse?> requestLoginApi(
+      LoginRequest loginRequest) async {
     final payload = {
-      'username': loginModel.email,
-      'password': loginModel.password,
+      'username': loginRequest.email,
+      'password': loginRequest.password,
     };
     debugPrint("Payload: $payload");
     try {
@@ -25,7 +25,7 @@ class LoginService {
 
       if (response.statusCode == 200) {
         final data = response.data;
-        return LoginResponseModel.fromJson(data);
+        return LoginResponse.fromJson(data);
       } else {
         debugPrint('Login failed with status: ${response.statusCode}');
         return null;

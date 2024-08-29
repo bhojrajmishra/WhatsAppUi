@@ -61,12 +61,12 @@ class _HomeViewState extends State<HomeView> {
                         chats: viewModel.chats,
                         onRefresh: viewModel.fetchUserList,
                       ),
-                UserListviewbuilder(
-                  status: const ["Status 1", "Status 2", "Status 3"],
+                const UserListviewbuilder(
+                  status: ["Status 1", "Status 2", "Status 3"],
                   icon: Icons.account_circle,
                 ),
-                UserListviewbuilder(
-                  status: const ["Call 1", "Call 2", "Call 3"],
+                const UserListviewbuilder(
+                  status: ["Call 1", "Call 2", "Call 3"],
                   icon: Icons.call,
                 ),
               ],

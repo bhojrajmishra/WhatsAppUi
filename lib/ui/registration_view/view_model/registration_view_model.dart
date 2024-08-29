@@ -3,9 +3,9 @@ import 'package:flutter_first_ui/base/base_view_model.dart';
 import 'package:flutter_first_ui/constants/constants_validation.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_model.dart';
-import 'package:flutter_first_ui/ui/registration_view/models/registration_response_model.dart';
+import 'package:flutter_first_ui/ui/registration_view/models/registration_response.dart';
 import 'package:flutter_first_ui/ui/registration_view/repository%20/registor_repository.dart';
-import 'package:flutter_first_ui/ui/registration_view/repository%20/repository%20Implementation/registration_repository_implimentation.dart';
+import 'package:flutter_first_ui/ui/registration_view/repository%20/registration_repository_implimentation.dart';
 
 class RegistrationViewModel extends BaseViewModel {
   final TextEditingController emailController = TextEditingController();
@@ -25,13 +25,13 @@ class RegistrationViewModel extends BaseViewModel {
 
     updateLoading(loading: true);
 
-    RegistrationModel registrationModel = RegistrationModel(
+    RegistrationRequest registrationModel = RegistrationRequest(
       fullname: fullname,
       email: email,
       password: password,
     );
 
-    RegistrationResponseModel? registorResult =
+    RegistrationResponse? registorResult =
         await _registrationRepository.requestRegisterApi(registrationModel);
 
     updateLoading(loading: false);
@@ -46,7 +46,7 @@ class RegistrationViewModel extends BaseViewModel {
     }
   }
 
-  void _handleSuccessfullRegistor(RegistrationResponseModel registerResponse) {
+  void _handleSuccessfullRegistor(RegistrationResponse registerResponse) {
     // Here you can handle the successful login
     debugPrint('Logged in as: ${registerResponse.fullName}');
     debugPrint('Token: ${registerResponse.token}');
@@ -65,7 +65,7 @@ class RegistrationViewModel extends BaseViewModel {
     if (context.mounted) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginView()),
+        MaterialPageRoute(builder: (context) => const LoginView()),
       );
     }
   }

@@ -1,4 +1,4 @@
-class RegistrationResponseModel {
+class RegistrationResponse {
   final String fullName;
   final String email;
   final int id;
@@ -7,7 +7,7 @@ class RegistrationResponseModel {
   final List<String> roles;
   final Map<String, dynamic> organizations;
 
-  RegistrationResponseModel({
+  RegistrationResponse({
     required this.fullName,
     required this.email,
     required this.id,
@@ -17,8 +17,8 @@ class RegistrationResponseModel {
     required this.organizations,
   });
 
-  factory RegistrationResponseModel.fromJson(Map<String, dynamic> json) {
-    return RegistrationResponseModel(
+  factory RegistrationResponse.fromJson(Map<String, dynamic> json) {
+    return RegistrationResponse(
       fullName: json['full_name'],
       email: json['email'],
       id: json['id'],
