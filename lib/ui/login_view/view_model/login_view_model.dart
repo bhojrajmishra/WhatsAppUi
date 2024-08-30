@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/constants/constants_validation.dart';
+import 'package:flutter_first_ui/base/widgets/constants_validation.dart';
 import 'package:flutter_first_ui/base/base_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_request.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';
@@ -12,20 +12,6 @@ class LoginViewModel extends BaseViewModel {
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final LoginRepository _loginRepository = LoginRepositoryImpl();
-
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter your email";
-    }
-    return null;
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter your password";
-    }
-    return null;
-  }
 
   Future<void> requestLoginApi(BuildContext context) async {
     final email = emailController.text;

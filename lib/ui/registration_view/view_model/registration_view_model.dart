@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/base/base_view_model.dart';
-import 'package:flutter_first_ui/constants/constants_validation.dart';
+import 'package:flutter_first_ui/base/widgets/constants_validation.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_request.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_response.dart';

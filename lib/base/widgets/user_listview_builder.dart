@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/components/user_list_tile.dart';
+import 'package:flutter_first_ui/base/widgets/user_list_tile.dart';
 
 /// A custom listview bulder widget that displays a list of [UserListTile] widgets.
 ///

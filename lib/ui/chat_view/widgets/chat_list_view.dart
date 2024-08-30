@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/base/list_tile_leading.dart';
-import 'package:flutter_first_ui/base/list_tile_title.dart';
-import 'package:flutter_first_ui/base/list_trailing.dart';
+import 'package:flutter_first_ui/base/widgets/list_tile/list_tile_leading.dart';
+import 'package:flutter_first_ui/base/widgets/list_tile/list_tile_title.dart';
+import 'package:flutter_first_ui/base/widgets/list_tile/list_trailing.dart';
 import 'package:flutter_first_ui/ui/chat_view/chat_view.dart';
 import 'package:flutter_first_ui/ui/chat_view/models/user_list_model.dart';
 

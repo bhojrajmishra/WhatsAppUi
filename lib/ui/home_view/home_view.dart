@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/themes/custom_theme.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/chat_list_view.dart';
-import 'package:flutter_first_ui/components/user_app_bar.dart';
-import 'package:flutter_first_ui/components/user_listview_builder.dart';
+import 'package:flutter_first_ui/base/widgets/user_app_bar.dart';
+import 'package:flutter_first_ui/base/widgets/user_listview_builder.dart';
 import 'package:flutter_first_ui/ui/home_view/view_model/home_view_model.dart';
 import 'package:flutter_first_ui/ui/setting_view/setting_view.dart';
 import 'package:provider/provider.dart';

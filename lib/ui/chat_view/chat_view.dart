@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/components/user_app_bar.dart';
+import 'package:flutter_first_ui/base/widgets/user_app_bar.dart';
 import 'package:flutter_first_ui/themes/custom_theme.dart';
 import 'package:flutter_first_ui/ui/chat_view/view_model/chat_view_model.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/message_bubble.dart';

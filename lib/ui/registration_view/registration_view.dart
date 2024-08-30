@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/ui/registration_view/view_model/registration_view_model.dart';
+import 'package:flutter_first_ui/utils/validator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/components/custom_text_field.dart';
@@ -41,26 +42,30 @@ class RegistrationView extends StatelessWidget {
                             controller: viewModel.nameController,
                             labelText: "Full Name",
                             obscureText: false,
+                            validator: (value) =>
+                                Validator.userNameValidator()(value),
                           ),
                           const SizedBox(height: 23),
                           CustomTextFormField(
                             controller: viewModel.emailController,
                             labelText: "Email",
                             obscureText: false,
+                            validator: (value) =>
+                                Validator.emailValidator()(value),
                           ),
                           const SizedBox(height: 23),
                           CustomTextFormField(
                             controller: viewModel.passwordController,
                             labelText: "Password",
                             obscureText: true,
+                            validator: (value) =>
+                                Validator.passwordValidator()(value),
                           ),
                           const SizedBox(height: 23),
                           CustomButton(
                             text: "Register",
                             onPressed: () {
-                              if (formKey.currentState?.validate() ?? false) {
-                                viewModel.requestRegisterApi(context);
-                              }
+                              viewModel.requestRegisterApi(context);
                             },
                           ),
                         ],
