@@ -16,8 +16,6 @@ import 'package:flutter/material.dart';
 ///   },
 /// )
 /// ```
-///
-/// The above example creates a list tile with a settings icon and text, and handles the tap event.
 class UserListTile extends StatelessWidget {
   /// The text to display in the list tile.
   final String text;

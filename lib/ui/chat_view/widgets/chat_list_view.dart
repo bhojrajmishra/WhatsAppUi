@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/base/list_tile_leading.dart';
 import 'package:flutter_first_ui/base/list_tile_title.dart';
+import 'package:flutter_first_ui/base/list_trailing.dart';
 import 'package:flutter_first_ui/ui/chat_view/chat_view.dart';
 import 'package:flutter_first_ui/ui/chat_view/models/user_list_model.dart';
 
@@ -22,23 +24,20 @@ class ChatListView extends StatelessWidget {
         itemCount: chats.length,
         itemBuilder: (BuildContext context, index) {
           return ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChatView(
-                    title: chats[index].email,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatView(
+                      title: chats[index].email,
+                    ),
                   ),
-                ),
-              );
-            },
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(chats[index].avatar),
-            ),
-            title: ListTileTitle(index: index, chats: chats),
-            subtitle: ListTileTitle(index: index, chats: chats),
-            trailing: Text(chats[index].id.toString()),
-          );
+                );
+              },
+              leading: ListTileLeading(chats: chats, index: index),
+              title: ListTileTitle(index: index, chats: chats),
+              subtitle: ListTileTitle(index: index, chats: chats),
+              trailing: ListTrailing(chats: chats, index: index));
         },
       ),
     );
