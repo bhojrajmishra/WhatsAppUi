@@ -33,12 +33,13 @@ class _HomeViewState extends State<HomeView> {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {},
-              color: CustomTheme.lightInversePrimaryColor,
+              color: CustomTheme.inversePrimary(context),
             ),
             IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-                color: CustomTheme.lightInversePrimaryColor),
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {},
+              color: CustomTheme.inversePrimary(context),
+            ),
           ],
           bottom: TabBar(
             tabs: const [
@@ -46,9 +47,9 @@ class _HomeViewState extends State<HomeView> {
               Tab(text: "Status"),
               Tab(text: "Calls"),
             ],
-            labelColor: Theme.of(context).colorScheme.inversePrimary,
+            labelColor: CustomTheme.inversePrimary(context),
             unselectedLabelColor: Colors.grey,
-            indicatorColor: CustomTheme.lightInversePrimaryColor,
+            indicatorColor: CustomTheme.inversePrimary(context),
           ),
         ),
         body: Consumer<HomeViewModel>(
@@ -82,7 +83,7 @@ class _HomeViewState extends State<HomeView> {
           },
           backgroundColor: const Color.fromARGB(255, 16, 83, 18),
           child:
-              Icon(Icons.settings, color: CustomTheme.lightInversePrimaryColor),
+              Icon(Icons.settings, color: CustomTheme.inversePrimary(context)),
         ),
       ),
     );

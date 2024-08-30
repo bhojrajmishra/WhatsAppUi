@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/components/user_app_bar.dart';
+import 'package:flutter_first_ui/themes/custom_theme.dart';
 import 'package:flutter_first_ui/ui/chat_view/view_model/chat_view_model.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/message_bubble.dart';
 import 'package:flutter_first_ui/ui/chat_view/widgets/message_input_row.dart';
@@ -14,8 +15,8 @@ class ChatView extends StatelessWidget {
     return Scaffold(
       appBar: UserAppBar(
         title: title,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: CustomTheme.primary(context),
+        foregroundColor: CustomTheme.secondary(context),
         actions: [
           IconButton(
             icon: const Icon(Icons.attach_file_outlined),

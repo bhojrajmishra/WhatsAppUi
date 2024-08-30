@@ -4,21 +4,44 @@ import 'package:flutter_first_ui/constants/constants_validation.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_request.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_response.dart';
-import 'package:flutter_first_ui/ui/registration_view/repository%20/registor_repository.dart';
-import 'package:flutter_first_ui/ui/registration_view/repository%20/registration_repository_implimentation.dart';
+import 'package:flutter_first_ui/ui/registration_view/repository%20/registration_repository.dart';
+import 'package:flutter_first_ui/ui/registration_view/repository%20/registration_repository_impl.dart';
 
 class RegistrationViewModel extends BaseViewModel {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final RegistrationRepository _registrationRepository =
       RegistrationRepositoryImpl();
+
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter your email";
+    }
+    return null;
+  }
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter your password";
+    }
+    return null;
+  }
+
+  String? validateUserName(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter your username";
+    }
+    return null;
+  }
 
   Future<void> requestRegisterApi(BuildContext context) async {
     final fullname = nameController.text;
     final email = emailController.text;
     final password = passwordController.text;
-    if (fullname.isEmpty || email.isEmpty || password.isEmpty) {
+
+    if (!formKey.currentState!.validate()) {
       _showSnackBar(context, ConstantsValidation.fillAllFieldsMessage);
       return;
     }

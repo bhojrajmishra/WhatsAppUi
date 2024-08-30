@@ -5,7 +5,7 @@ import 'package:flutter_first_ui/ui/login_view/models/login_request.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';
 import 'package:flutter_first_ui/ui/home_view/home_view.dart';
 import 'package:flutter_first_ui/ui/login_view/repository/login_repository.dart';
-import 'package:flutter_first_ui/ui/login_view/repository/login_repository_implementation.dart';
+import 'package:flutter_first_ui/ui/login_view/repository/login_repository_impl.dart';
 
 class LoginViewModel extends BaseViewModel {
   final TextEditingController emailController = TextEditingController();

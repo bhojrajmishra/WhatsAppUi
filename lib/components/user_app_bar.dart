@@ -5,18 +5,6 @@ import 'package:flutter_first_ui/themes/custom_theme.dart';
 ///
 /// This widget returns an [AppBar] with customizable properties, including [title], [actions],
 /// [leading], [bottom], [backgroundColor], and [foregroundColor].
-///
-/// ### Example :
-/// ```dart
-/// UserAppBar(
-///   title: 'Home',
-///   actions: [IconButton(icon: Icon(Icons.settings), onPressed: () {})],
-///   backgroundColor: Colors.blue,
-///   foregroundColor: Colors.white,
-/// )
-/// ```
-///
-/// The above example creates an app bar with a title, an action button, and custom colors.
 class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// The primary widget displayed in the app bar's title area.
   final String title;
@@ -49,10 +37,6 @@ class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.foregroundColor,
     super.key,
   });
-
-  /// Builds the custom app bar widget.
-  ///
-  /// This method returns an [AppBar] widget with the specified properties.
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -62,7 +46,7 @@ class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: foregroundColor ?? Colors.white), // Default color is white
       ),
       backgroundColor: backgroundColor ??
-          CustomTheme.lightPrimaryColor, // Uses primary color if not provided
+          CustomTheme.primary(context), // Uses primary color if not provided
       actions: actions, // Optional action widgets
       leading: leading, // Optional leading widget
       bottom: bottom, // Optional bottom widget

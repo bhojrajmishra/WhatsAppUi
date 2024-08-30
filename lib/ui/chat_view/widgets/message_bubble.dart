@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 
 /// A custom MessageBubble widget to display the message in the chat screen.
-/// The MessageBubble widget takes [message] and [isUserMessage] as parameters
-/// and returns a styled container with the message text.
-/// The [isUserMessage] parameter determines the alignment and color of the message.
-/// If [isUserMessage] is true, the message is aligned to the right and displayed in green.
-/// If [isUserMessage] is false, the message is aligned to the left and displayed in grey.
+///
 /// This widget is used in the ChatView screen to display chat messages.
-/// Example:
+/// Example can assume:
 /// ```dart
 /// MessageBubble(
 ///  message: 'Hello, how are you?',
 /// isUserMessage: true,
 /// )
 /// ```
-/// The above example creates a message bubble with the text 'Hello, how are you?' aligned to the right.
+/// The MessageBubble widget takes [message] and [isUserMessage] as parameters
+/// and returns a styled container with the message text.
 class MessageBubble extends StatelessWidget {
   // The message text to display in the bubble.
   final String message;
   // A boolean value to determine if the message is sent by the user or received from another user.
   final bool isUserMessage;
+
+  /// Constructor for [MessageBubble].
   const MessageBubble({
     required this.message,
     required this.isUserMessage,

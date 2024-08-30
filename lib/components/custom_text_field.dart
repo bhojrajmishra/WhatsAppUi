@@ -2,32 +2,7 @@ import 'package:flutter/material.dart';
 
 /// A custom text form field widget that wraps a [TextFormField] with commonly used configurations.
 ///
-/// This widget is intended to be used in forms such as login or registration, where specific text input
-/// fields (like email, password, etc.) are required.
-///
 /// The widget provides additional customization options through its parameters [controller], [labelText], [obscureText], [validator], [enableSuggestions],[autocorrect],[keyboardType] ,  allowing you to control
-/// aspects such as text obscuring, validation, and input type.
-///
-/// ### Example:
-///
-/// ```dart
-/// CustomTextFormField(
-///   controller: TextEditingController(),
-///   labelText: "Email",
-///   obscureText: false,
-///   validator: (value) {
-///     if (value!.isEmpty) {
-///       return "Please enter email";
-///     }
-///     return null;
-///   },
-///   enableSuggestions: true,
-///   autocorrect: true,
-///   keyboardType: TextInputType.emailAddress,
-/// )
-/// ```
-///
-/// The above example creates a text field for an email input with validation for empty fields.
 class CustomTextFormField extends StatelessWidget {
   /// Controls the text being edited.
   final TextEditingController controller;
@@ -50,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
   /// The type of keyboard to use for the text field.
   final TextInputType keyboardType;
 
-  /// Constructor for [CustomTextFormField].
+  /// Required constructor for the [CustomTextFormField] widget.
   const CustomTextFormField({
     required this.controller,
     required this.labelText,

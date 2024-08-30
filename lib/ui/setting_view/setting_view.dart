@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/components/user_app_bar.dart';
 import 'package:flutter_first_ui/themes/theme_model/theme_modification.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +15,7 @@ class _SettingViewState extends State<SettingView> {
   Widget build(BuildContext context) {
     var themeProvider = context.watch<ThemeModification>();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Settings"),
-      ),
+      appBar: const UserAppBar(title: 'Setting'),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

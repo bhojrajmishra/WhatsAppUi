@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_first_ui/base/list_tile_title.dart';
 import 'package:flutter_first_ui/ui/chat_view/chat_view.dart';
 import 'package:flutter_first_ui/ui/chat_view/models/user_list_model.dart';
 
@@ -34,10 +35,8 @@ class ChatListView extends StatelessWidget {
             leading: CircleAvatar(
               backgroundImage: NetworkImage(chats[index].avatar),
             ),
-            title: Text(chats[index].email,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text(chats[index].firstName,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            title: ListTileTitle(index: index, chats: chats),
+            subtitle: ListTileTitle(index: index, chats: chats),
             trailing: Text(chats[index].id.toString()),
           );
         },
