@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/base/base_view_model.dart';
-import 'package:flutter_first_ui/base/widgets/constants_validation.dart';
+import 'package:flutter_first_ui/constants/constants_validation.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_request.dart';
 import 'package:flutter_first_ui/ui/registration_view/models/registration_response.dart';
@@ -11,37 +11,16 @@ class RegistrationViewModel extends BaseViewModel {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formsKey = GlobalKey<FormState>();
   final RegistrationRepository _registrationRepository =
       RegistrationRepositoryImpl();
-
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter your email";
-    }
-    return null;
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter your password";
-    }
-    return null;
-  }
-
-  String? validateUserName(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter your username";
-    }
-    return null;
-  }
 
   Future<void> requestRegisterApi(BuildContext context) async {
     final fullname = nameController.text;
     final email = emailController.text;
     final password = passwordController.text;
 
-    if (!formKey.currentState!.validate()) {
+    if (!formsKey.currentState!.validate()) {
       _showSnackBar(context, ConstantsValidation.fillAllFieldsMessage);
       return;
     }
@@ -91,5 +70,13 @@ class RegistrationViewModel extends BaseViewModel {
         MaterialPageRoute(builder: (context) => const LoginView()),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    super.dispose();
   }
 }

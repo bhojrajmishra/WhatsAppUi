@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// This is chatview model class which is used to handle the chat view
 ///
-///
+/// The [controller] is a TextEditingController which is used to control the textfield
 class ChatViewModel extends ChangeNotifier {
   final TextEditingController controller = TextEditingController();
   final List<String> messages = [];

@@ -12,8 +12,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: ChatViewModel()),
-        ChangeNotifierProvider.value(value: ThemeModification()),
+        ChangeNotifierProvider(create: (_) => ChatViewModel()),
+        ChangeNotifierProvider(create: (_) => ThemeModification()),
         ChangeNotifierProvider(create: (_) => HomeViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => RegistrationViewModel()),
@@ -23,9 +23,14 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeModification>(context);

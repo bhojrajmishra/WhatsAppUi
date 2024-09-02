@@ -35,16 +35,12 @@ class UserListTile extends StatelessWidget {
     this.onTap,
     super.key,
   });
-
-  /// Builds the [UserListTile] widget.
-  ///
-  /// This method returns a [ListTile] widget with the specified [text], [icon], and [onTap] function.
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: onTap, // Handles the tap event if provided
-      title: Text(text), // The main text of the list tile
-      leading: Icon(icon), // The icon displayed at the start of the tile
+      onTap: onTap,
+      title: Text(text),
+      leading: Icon(icon),
     );
   }
 }

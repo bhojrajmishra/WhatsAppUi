@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/base/widgets/constants_validation.dart';
+import 'package:flutter_first_ui/constants/constants_validation.dart';
 import 'package:flutter_first_ui/base/base_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_request.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';

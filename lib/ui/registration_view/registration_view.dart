@@ -3,8 +3,8 @@ import 'package:flutter_first_ui/ui/registration_view/view_model/registration_vi
 import 'package:flutter_first_ui/utils/validator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_first_ui/ui/login_view/login_view.dart';
-import 'package:flutter_first_ui/components/custom_text_field.dart';
-import 'package:flutter_first_ui/ui/home_view/widgets/custom_button.dart';
+import 'package:flutter_first_ui/base/widgets/custom_text_form_field.dart';
+import 'package:flutter_first_ui/base/widgets/custom_button.dart';
 
 class RegistrationView extends StatelessWidget {
   const RegistrationView({super.key});
@@ -26,13 +26,12 @@ class RegistrationView extends StatelessWidget {
       ),
       body: Consumer<RegistrationViewModel>(
         builder: (context, viewModel, child) {
-          final formKey = GlobalKey<FormState>();
           return Column(
             children: [
               Expanded(
                 child: SingleChildScrollView(
                   child: Form(
-                    key: formKey,
+                    key: viewModel.formsKey,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(

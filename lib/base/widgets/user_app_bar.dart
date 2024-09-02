@@ -47,9 +47,9 @@ class UserAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: backgroundColor ??
           CustomTheme.primary(context), // Uses primary color if not provided
-      actions: actions, // Optional action widgets
-      leading: leading, // Optional leading widget
-      bottom: bottom, // Optional bottom widget
+      actions: actions,
+      leading: leading,
+      bottom: bottom,
     );
   }
 

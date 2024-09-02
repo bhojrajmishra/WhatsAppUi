@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_first_ui/utils/validator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_first_ui/ui/login_view/view_model/login_view_model.dart';
-import 'package:flutter_first_ui/components/custom_text_field.dart';
-import 'package:flutter_first_ui/ui/home_view/widgets/custom_button.dart';
+import 'package:flutter_first_ui/base/widgets/custom_text_form_field.dart';
+import 'package:flutter_first_ui/base/widgets/custom_button.dart';
 import 'package:flutter_first_ui/ui/registration_view/widgets/registration_button.dart';
 
 class LoginView extends StatelessWidget {
@@ -15,7 +15,7 @@ class LoginView extends StatelessWidget {
       body: Consumer<LoginViewModel>(
         builder: (context, loginViewModel, child) {
           return Form(
-            key: loginViewModel.formKey, // Use formKey from ViewModel
+            key: loginViewModel.formKey,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
