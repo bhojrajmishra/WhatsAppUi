@@ -6,6 +6,13 @@ import 'package:flutter_first_ui/ui/login_view/services/login_service.dart';
 class LoginRepositoryImpl implements LoginRepository {
   @override
   Future<LoginResponse?> requestLoginApi(LoginRequest loginRequest) async {
-    return await LoginService.requestLoginApi(loginRequest);
+    final loginService = LoginService();
+    return await loginService.requestLoginApi(loginRequest);
+  }
+
+  @override
+  Future<String?> getToken() async {
+    final loginService = LoginService();
+    return await loginService.getToken();
   }
 }

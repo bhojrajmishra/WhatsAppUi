@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_first_ui/constants/constants_validation.dart';
 import 'package:flutter_first_ui/base/base_view_model.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_request.dart';
 import 'package:flutter_first_ui/ui/login_view/models/login_response.dart';
@@ -14,53 +13,48 @@ class LoginViewModel extends BaseViewModel {
   final LoginRepository _loginRepository = LoginRepositoryImpl();
 
   Future<void> requestLoginApi(BuildContext context) async {
-    final email = emailController.text;
-    final password = passwordController.text;
-
     if (!formKey.currentState!.validate()) {
-      _showSnackBar(context, ConstantsValidation.fillAllFieldsMessage);
+      _showSnackBar(context, 'Please fill all fields');
       return;
     }
 
     updateLoading(loading: true);
 
-    LoginRequest loginModel = LoginRequest(email: email, password: password);
+    LoginRequest loginRequest = LoginRequest(
+      email: emailController.text,
+      password: passwordController.text,
+    );
     LoginResponse? loginResult =
-        await _loginRepository.requestLoginApi(loginModel);
+        await _loginRepository.requestLoginApi(loginRequest);
 
     updateLoading(loading: false);
 
     if (!context.mounted) return;
 
     if (loginResult != null) {
-      _handleSuccessfulLogin(loginResult);
       _navigateToHome(context);
     } else {
-      _showSnackBar(context, ConstantsValidation.loginFailedMessage);
+      _showSnackBar(context, 'Login failed');
     }
   }
 
-  void _handleSuccessfulLogin(LoginResponse loginResponse) {
-    // Handle the successful login
-    debugPrint('Logged in as: ${loginResponse.fullName}');
-    debugPrint('Token: ${loginResponse.token}');
-    // Add more handling as needed
+  Future<void> checkLoginStatus(BuildContext context) async {
+    String? token = await _loginRepository.getToken();
+    if (token != null && context.mounted) {
+      _navigateToHome(context);
+    }
   }
 
   void _showSnackBar(BuildContext context, String message) {
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
-      );
-    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   void _navigateToHome(BuildContext context) {
-    if (context.mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeView()),
-      );
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeView()),
+    );
   }
 }
